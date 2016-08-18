@@ -94,16 +94,17 @@
 </header>
     <div class="article-content">
         
-        <p>#JavaWeb<br>java web 应用中可以包含以下内容<br>1.Servlet<br>2.JSP<br>3.实用类<br>4.静态文本如HTML，图片等<br>5.描述Web应用的信息（web.xml）  </p>
-<p>##Servlet容器  </p>
-<ul>
+        <h1 id="JavaWeb"><a href="#JavaWeb" class="headerlink" title="JavaWeb"></a>JavaWeb</h1><p>java web 应用中可以包含以下内容<br>1.Servlet<br>2.JSP<br>3.实用类<br>4.静态文本如HTML，图片等<br>5.描述Web应用的信息（web.xml）  </p>
+<h2 id="Servlet容器"><a href="#Servlet容器" class="headerlink" title="Servlet容器"></a>Servlet容器</h2><ul>
 <li>Servlet容器为JavaWeb应用提供<strong>运行时环境</strong>，它负责管理Servlet和JSP的生命周期。以及管理他们的共享数据。</li>
 <li>Servlet容器可以来创建Servlet，并调用Servlet的相关生命周期方法。  </li>
 <li>Servlet容器运行  Servlet， JSP，Filter等的软件环境</li>
 <li>JSP，Filter，Listener，Tag…<br><strong>Tomcat</strong>也是一种Servlet容器  </li>
 <li>Tomcat：开源的Servlet容器  </li>
 <li>Servlet容器负责Servlet和客户的通信以及调用Servlet的方法。  </li>
-<li><p>Servlet是一个接口<br>##Servlet 生命周期的方法:<br>###以下方法都是由Servlet容器负责调用<br>1.构造器：只被调用一次。只有第一次请求Servlet时，创建Servlet的实例。调用构造器。<br>2.init 方法： 只被调用一次。在创建好实例后立即被调用。用于初始化当前Servlet。<br>3.service：别多次调用。每次请求都会调用service方法。实际用于相应请求的。<br>4.destroy：只被调用一次。在当前Servlet所在的WEB应用程序被写在前调用。用于释放当前Servlet所占的资源。<br>###load-on-startup 参数<br>1.配置在Servlet节点中：  </p>
+<li><p>Servlet是一个接口 </p>
+<h2 id="Servlet-生命周期的方法"><a href="#Servlet-生命周期的方法" class="headerlink" title="Servlet 生命周期的方法:"></a>Servlet 生命周期的方法:</h2><h3 id="以下方法都是由Servlet容器负责调用"><a href="#以下方法都是由Servlet容器负责调用" class="headerlink" title="以下方法都是由Servlet容器负责调用"></a>以下方法都是由Servlet容器负责调用</h3><p>1.构造器：只被调用一次。只有第一次请求Servlet时，创建Servlet的实例。调用构造器。<br>2.init 方法： 只被调用一次。在创建好实例后立即被调用。用于初始化当前Servlet。<br>3.service：别多次调用。每次请求都会调用service方法。实际用于相应请求的。<br>4.destroy：只被调用一次。在当前Servlet所在的WEB应用程序被写在前调用。用于释放当前Servlet所占的资源。</p>
+<h3 id="load-on-startup-参数"><a href="#load-on-startup-参数" class="headerlink" title="load-on-startup 参数"></a>load-on-startup 参数</h3><p>1.配置在Servlet节点中：  </p>
 <p>  <servlet>  </servlet></p>
 <pre><code>&lt;!--Servlet注册的名字--&gt;
 &lt;servlet-name&gt;helloservlet&lt;/servlet-name&gt;  
@@ -111,7 +112,10 @@
 &lt;servlet-class&gt;nuc.sw.cxg.HelloServlet&lt;/servlet-class&gt;  
 &lt;!--可以指定Servlet被创建的时机--&gt;
 &lt;load-on-startup&gt;2&lt;load-on-startup&gt;
-</code></pre><p>   <br>2.load-on-startup 可以指定Servlet被创建的时机：<br>若为负数，则在第一次请求时被创建。若为0或正数，则在当前WEB应用被Servlet容器加载时创建实例，且数值越小越早被创建。<br>###Servlet-mapping<br>1.同一个Servlet可以被映射到多个URL上，即多个<servlet-mapping>元素的<servlet-name>子元素的设置值可以事同一个Servlet的注册名。<br>2.在Servlet映射到的URL中也可以实用 <em><br>通配符，但是只能由两种固定的格式：<br>一种是 “</em>.扩展名” ，另一种是以正斜杠（/）开头并以“/*结尾” 。<br>##Servlet的HelloWorld<br>###创建一个Servlet接口的实现类<br>  <code>public class HelloServlet implements Servlet</code><br>###在web.xml里配置和映射Servlet<br>  <servlet>  </servlet></servlet-name></servlet-mapping></p>
+</code></pre><p>   <br>2.load-on-startup 可以指定Servlet被创建的时机：<br>若为负数，则在第一次请求时被创建。若为0或正数，则在当前WEB应用被Servlet容器加载时创建实例，且数值越小越早被创建。  </p>
+<h3 id="Servlet-mapping"><a href="#Servlet-mapping" class="headerlink" title="Servlet-mapping"></a>Servlet-mapping</h3><p>1.同一个Servlet可以被映射到多个URL上，即多个<servlet-mapping>元素的<servlet-name>子元素的设置值可以事同一个Servlet的注册名。<br>2.在Servlet映射到的URL中也可以实用 <em><br>通配符，但是只能由两种固定的格式：<br>一种是 “</em>.扩展名” ，另一种是以正斜杠（/）开头并以“/*结尾” 。</servlet-name></servlet-mapping></p>
+<h2 id="Servlet的HelloWorld"><a href="#Servlet的HelloWorld" class="headerlink" title="Servlet的HelloWorld"></a>Servlet的HelloWorld</h2><h3 id="创建一个Servlet接口的实现类"><a href="#创建一个Servlet接口的实现类" class="headerlink" title="创建一个Servlet接口的实现类"></a>创建一个Servlet接口的实现类</h3><p>  <code>public class HelloServlet implements Servlet</code>  </p>
+<h3 id="在web-xml里配置和映射Servlet"><a href="#在web-xml里配置和映射Servlet" class="headerlink" title="在web.xml里配置和映射Servlet"></a>在web.xml里配置和映射Servlet</h3><p>  <servlet>  </servlet></p>
 <pre><code>&lt;!--Servlet注册的名字--&gt;
 &lt;servlet-name&gt;helloservlet&lt;/servlet-name&gt;  
 &lt;!--Servlet的全类名--&gt;
@@ -121,7 +125,8 @@
 &lt;servlet-name&gt;helloservlet&lt;/servlet-name&gt;  
 &lt;!--映射具体的访问路径：其中/代表当前WEB应用的根目录--&gt;
 &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
-</code></pre><p>   <servlet-mapping><br>##ServletConfig对象<br>ServletConfig：封装了Servlet的配置信息，并且可以获取ServletContext对象<br>1.配置Servlet的初始化参数：  </servlet-mapping></p>
+</code></pre><p>   <servlet-mapping>  </servlet-mapping></p>
+<h2 id="ServletConfig对象"><a href="#ServletConfig对象" class="headerlink" title="ServletConfig对象"></a>ServletConfig对象</h2><p>ServletConfig：封装了Servlet的配置信息，并且可以获取ServletContext对象<br>1.配置Servlet的初始化参数：  </p>
 <p>  <servlet>  </servlet></p>
 <pre><code>   &lt;!--Servlet注册的名字--&gt;
    &lt;servlet-name&gt;helloservlet&lt;/servlet-name&gt;  
@@ -144,7 +149,8 @@
 &lt;/servlet&gt;  
 </code></pre><p>2.获取初始化参数：  </p>
 <blockquote>
-<p>getInitParameter(String name) :获取指定参数名的初始化参数<br>getInitParameterName() :获取参数名组成的Enumeration对象<br>##JSP<br>java代码写在<br>&lt;%<br>%&gt;<br>里面</p>
+<p>getInitParameter(String name) :获取指定参数名的初始化参数<br>getInitParameterName() :获取参数名组成的Enumeration对象</p>
+<h2 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h2><p>java代码写在<br>&lt;%<br>%&gt;<br>里面</p>
 </blockquote>
 </li>
 </ul>
