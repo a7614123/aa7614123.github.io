@@ -4,23 +4,35 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hadoop安装配置 | Hexo</title>
+    <title>Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Chen xigong">
     
 
     
-    <meta name="description" content="1.配置hadoop 1.1上传hadoop包 1.2解压hadoop包 1.3配置hadoop伪分布式（要修改5个文件） 1.4将Hadoop添加到环境变量中 1.5初始化HDFS（格式化文件系统） 1.6启动HDFS和YARN 1.7测试HDFS 1.8测试MR和YARN  1.9配置SSH免密码登录">
+    <meta name="description" content="#JavaWebjava web 应用中可以包含以下内容1.Servlet2.JSP3.实用类4.静态文本如HTML，图片等5.描述Web应用的信息（web.xml）  
+##Servlet容器  
+
+Servlet容器为JavaWeb应用提供运行时环境，它负责管理Servlet和JSP的生命周期。以及管理他们的共享数据。
+Servlet容器可以来创建Servlet，并调用Servlet的相关生命">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hadoop安装配置">
-<meta property="og:url" content="http://chenxigong.top/2016/07/18/Hadoop安装配置/index.html">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://chenxigong.top/2016/08/18/JavaWeb/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.配置hadoop 1.1上传hadoop包 1.2解压hadoop包 1.3配置hadoop伪分布式（要修改5个文件） 1.4将Hadoop添加到环境变量中 1.5初始化HDFS（格式化文件系统） 1.6启动HDFS和YARN 1.7测试HDFS 1.8测试MR和YARN  1.9配置SSH免密码登录">
-<meta property="og:updated_time" content="2016-07-18T11:42:20.536Z">
+<meta property="og:description" content="#JavaWebjava web 应用中可以包含以下内容1.Servlet2.JSP3.实用类4.静态文本如HTML，图片等5.描述Web应用的信息（web.xml）  
+##Servlet容器  
+
+Servlet容器为JavaWeb应用提供运行时环境，它负责管理Servlet和JSP的生命周期。以及管理他们的共享数据。
+Servlet容器可以来创建Servlet，并调用Servlet的相关生命">
+<meta property="og:updated_time" content="2016-08-18T10:02:47.547Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hadoop安装配置">
-<meta name="twitter:description" content="1.配置hadoop 1.1上传hadoop包 1.2解压hadoop包 1.3配置hadoop伪分布式（要修改5个文件） 1.4将Hadoop添加到环境变量中 1.5初始化HDFS（格式化文件系统） 1.6启动HDFS和YARN 1.7测试HDFS 1.8测试MR和YARN  1.9配置SSH免密码登录">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="#JavaWebjava web 应用中可以包含以下内容1.Servlet2.JSP3.实用类4.静态文本如HTML，图片等5.描述Web应用的信息（web.xml）  
+##Servlet容器  
+
+Servlet容器为JavaWeb应用提供运行时环境，它负责管理Servlet和JSP的生命周期。以及管理他们的共享数据。
+Servlet容器可以来创建Servlet，并调用Servlet的相关生命">
 
     
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -80,14 +92,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/07/18/Hadoop安装配置/" title="Hadoop安装配置" itemprop="url">Hadoop安装配置</a>
+      <a href="/2016/08/18/JavaWeb/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chen xigong" target="_blank" itemprop="author">Chen xigong</a>
 		
   <p class="article-time">
-    <time datetime="2016-07-18T11:36:16.000Z" itemprop="datePublished"> 发表于 2016-07-18</time>
+    <time datetime="2016-08-18T10:23:33.182Z" itemprop="datePublished"> 发表于 2016-08-18</time>
     
   </p>
 </header>
@@ -96,65 +108,64 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-配置hadoop"><span class="toc-number">1.</span> <span class="toc-text">1.配置hadoop</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6启动HDFS和YARN"><span class="toc-number">1.1.</span> <span class="toc-text">1.6启动HDFS和YARN</span></a></li></ol></li></ol>
+			
 		
 		</div>
 		
-		<h1 id="1-配置hadoop"><a href="#1-配置hadoop" class="headerlink" title="1.配置hadoop"></a>1.配置hadoop</h1><p>先将linux的防火墙关闭<br><strong>1) 重启后生效</strong><br>开启： chkconfig iptables on<br>关闭： chkconfig iptables off </p>
-<p><strong>2) 即时生效，重启后失效</strong><br>开启： service iptables start<br>关闭： service iptables stop </p>
-<p>##1.1上传hadoop包</p>
-<p>##1.2解压hadoop包<br>首先在跟目录下创建一个master目录  </p>
-<p><code>mkdir /master</code>  </p>
-<p><code>tar -zxvf hadoop-2.2.0.tar.gz -C /</code></p>
-<p>##1.3配置hadoop伪分布式（要修改5个文件）<br><strong>第一个: <code>hadoop-env.sh</code></strong><br><code>vim hadoop-env.sh</code><br>&nbsp;&nbsp; <code>export JAVA_HOME=/opt/jdk1.7.0_45</code>  </p>
-<p><strong>第二个：<code>core-site.xml</code></strong><br>vim core-site.xml<br>    <configuration><br>        <!--用来指定HDFS的老大（namenode）的地址--><br>        <property><br>            <name>fs.defaultFS</name><br>            <value>hdfs://master:9000</value><br>        </property></configuration></p>
-<pre><code>    &lt;!-- 用来指定hadoop运行时产生文件的存放目录 --&gt;
-    &lt;property&gt;    
-        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
-        &lt;value&gt;/master/hadoop-2.2.0/tmp&lt;/value&gt;
-    &lt;/property&gt;
-&lt;configuration&gt;
-</code></pre><p><strong>第三个:<code>hdfs-site.xml</code></strong>  </p>
-<pre><code>&lt;configuration&gt;
-    &lt;!--用来指定HDFS保存数据副本的数量--&gt;
-    &lt;property&gt;
-        &lt;name&gt;dfs.replication&lt;/name&gt;
-        &lt;value&gt;1&lt;/value&gt;
-    &lt;/property&gt;
-&lt;configuration&gt;
-</code></pre><p><strong>第四个：<code>mapred-site.xml(mv mapred-site.xml.template mapred-site.xml)</code></strong>  </p>
-<pre><code>&lt;configuration&gt;  
+		<p>#JavaWeb<br>java web 应用中可以包含以下内容<br>1.Servlet<br>2.JSP<br>3.实用类<br>4.静态文本如HTML，图片等<br>5.描述Web应用的信息（web.xml）  </p>
+<p>##Servlet容器  </p>
+<ul>
+<li>Servlet容器为JavaWeb应用提供<strong>运行时环境</strong>，它负责管理Servlet和JSP的生命周期。以及管理他们的共享数据。</li>
+<li>Servlet容器可以来创建Servlet，并调用Servlet的相关生命周期方法。  </li>
+<li>Servlet容器运行  Servlet， JSP，Filter等的软件环境</li>
+<li>JSP，Filter，Listener，Tag…<br><strong>Tomcat</strong>也是一种Servlet容器  </li>
+<li>Tomcat：开源的Servlet容器  </li>
+<li>Servlet容器负责Servlet和客户的通信以及调用Servlet的方法。  </li>
+<li><p>Servlet是一个接口<br>##Servlet 生命周期的方法:<br>###以下方法都是由Servlet容器负责调用<br>1.构造器：只被调用一次。只有第一次请求Servlet时，创建Servlet的实例。调用构造器。<br>2.init 方法： 只被调用一次。在创建好实例后立即被调用。用于初始化当前Servlet。<br>3.service：别多次调用。每次请求都会调用service方法。实际用于相应请求的。<br>4.destroy：只被调用一次。在当前Servlet所在的WEB应用程序被写在前调用。用于释放当前Servlet所占的资源。<br>###load-on-startup 参数<br>1.配置在Servlet节点中：  </p>
+<p>  <servlet>  </servlet></p>
+<pre><code>&lt;!--Servlet注册的名字--&gt;
+&lt;servlet-name&gt;helloservlet&lt;/servlet-name&gt;  
+&lt;!--Servlet的全类名--&gt;
+&lt;servlet-class&gt;nuc.sw.cxg.HelloServlet&lt;/servlet-class&gt;  
+&lt;!--可以指定Servlet被创建的时机--&gt;
+&lt;load-on-startup&gt;2&lt;load-on-startup&gt;
+</code></pre><p>   <br>2.load-on-startup 可以指定Servlet被创建的时机：<br>若为负数，则在第一次请求时被创建。若为0或正数，则在当前WEB应用被Servlet容器加载时创建实例，且数值越小越早被创建。<br>###Servlet-mapping<br>1.同一个Servlet可以被映射到多个URL上，即多个<servlet-mapping>元素的<servlet-name>子元素的设置值可以事同一个Servlet的注册名。<br>2.在Servlet映射到的URL中也可以实用 <em><br>通配符，但是只能由两种固定的格式：<br>一种是 “</em>.扩展名” ，另一种是以正斜杠（/）开头并以“/*结尾” 。<br>##Servlet的HelloWorld<br>###创建一个Servlet接口的实现类<br>  <code>public class HelloServlet implements Servlet</code><br>###在web.xml里配置和映射Servlet<br>  <servlet>  </servlet></servlet-name></servlet-mapping></p>
+<pre><code>&lt;!--Servlet注册的名字--&gt;
+&lt;servlet-name&gt;helloservlet&lt;/servlet-name&gt;  
+&lt;!--Servlet的全类名--&gt;
+&lt;servlet-class&gt;nuc.sw.cxg.HelloServlet&lt;/servlet-class&gt;
+</code></pre><p>   <br>   <servlet-mapping>  </servlet-mapping></p>
+<pre><code>&lt;!--需要和某一个servlet节点的servlet-name子节点的文本节点一致--&gt;
+&lt;servlet-name&gt;helloservlet&lt;/servlet-name&gt;  
+&lt;!--映射具体的访问路径：其中/代表当前WEB应用的根目录--&gt;
+&lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+</code></pre><p>   <servlet-mapping><br>##ServletConfig对象<br>ServletConfig：封装了Servlet的配置信息，并且可以获取ServletContext对象<br>1.配置Servlet的初始化参数：  </servlet-mapping></p>
+<p>  <servlet>  </servlet></p>
+<pre><code>   &lt;!--Servlet注册的名字--&gt;
+   &lt;servlet-name&gt;helloservlet&lt;/servlet-name&gt;  
+   &lt;!--Servlet的全类名--&gt;
+   &lt;servlet-class&gt;nuc.sw.cxg.HelloServlet&lt;/servlet-class&gt;  
+   **&lt;!--配置Servlet的初始化参数。且节点必须在load-on-statrup前面--&gt;  
+   &lt;init-param&gt;  
+       &lt;!--参数名--&gt;
+       &lt;param-name&gt;user&lt;/param-name&gt;  
+       &lt;!--参数值--&gt;
+       &lt;param-value&gt;root&lt;/param-value&gt;
+   &lt;/init-param&gt;  
 
-    &lt;！-- 告诉hadoop以后MR运行在YARN上 --&gt;
-    &lt;property&gt;
-        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
-        &lt;value&gt;yarn&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;
-</code></pre><p><strong>第五个：<code>yarn-site.xml</code></strong>  </p>
-<pre><code>&lt;configuration&gt;  
-    &lt;!-- NodeManager获取数据的方式是shuffle --&gt;
-    &lt;property&gt;
-        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
-        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
-    &lt;/property&gt;
-    &lt;!-- 指定YARN的老大（ResourceManager）的地址 --&gt;
-    &lt;property&gt;
-        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
-        &lt;value&gt;master&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;  
-</code></pre><p>##1.4将Hadoop添加到环境变量中<br>export HADOOP_HOME=/master/hadoop-2.2.0<br>export JAVA_HOME=/opt/jdk1.7.0_45<br>export JRE_HOME=$JAVA_HOME/jre<br>export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH<br>export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH:$HADOOP_HOME/bin  </p>
-<p><strong>刷新配置</strong><br>source /etc/profile</p>
-<p>##1.5初始化HDFS（格式化文件系统）<br>hadoop namenode -format(过时了)<br>hdfs namenode -format  </p>
-<h2 id="1-6启动HDFS和YARN"><a href="#1-6启动HDFS和YARN" class="headerlink" title="1.6启动HDFS和YARN"></a>1.6启动HDFS和YARN</h2><p>./start-all.sh(过时了This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh) </p>
-<p>有个小问题（需要多次输入密码）</p>
-<p><strong>通过浏览器的方式验证</strong>  </p>
-<p><a href="http://192.168.187.185:50070(hdfs管理界面" target="_blank" rel="external">http://192.168.187.185:50070(hdfs管理界面</a>)<br><a href="http://192.168.187.185:50030" target="_blank" rel="external">http://192.168.187.185:50030</a><br><a href="http://192.168.187.185:8088(yarn管理界面" target="_blank" rel="external">http://192.168.187.185:8088(yarn管理界面</a>)  </p>
-<p>##1.7测试HDFS<br><strong>上传文件到HDFS</strong><br>hadoop fs -put /opt/jdk-7u45-linux-x64.tar.gz hdfs://master:9000/jdk</p>
-<p><strong>从HDFS下载文件到本地</strong><br>hadoop fs -get hdfs://master:9000/jdk /home/jdk1.7 </p>
-<p>##1.8测试MR和YARN  </p>
-<p>##1.9配置SSH免密码登录<br>生成ssh免登录密钥<br>ssh-keygen -t rsa<br>执行完这个命令后，会生成两个文件id_rsa(私钥)，id_rsa.pub(公钥)<br>将公钥拷贝到要免密码登陆的机器上<br><code>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code><br>或<br><code>ssh-copy-id master</code>  </p>
+   &lt;init-param&gt;  
+       &lt;param-name&gt;password&lt;/param-name&gt;  
+       &lt;param-value&gt;123&lt;/param-value&gt;  
+   &lt;/init-param&gt;  **
+   &lt;!--可以指定Servlet被创建的时机--&gt;
+   &lt;load-on-startup&gt;2&lt;load-on-startup&gt;
+&lt;/servlet&gt;  
+</code></pre><p>2.获取初始化参数：  </p>
+<blockquote>
+<p>getInitParameter(String name) :获取指定参数名的初始化参数<br>getInitParameterName() :获取参数名组成的Enumeration对象<br>##JSP<br>java代码写在<br>&lt;%<br>%&gt;<br>里面</p>
+</blockquote>
+</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -167,7 +178,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://chenxigong.top/2016/07/18/Hadoop安装配置/" data-title="Hadoop安装配置 | Hexo" data-tsina="null" class="share clearfix">
+	  <div data-url="http://chenxigong.top/2016/08/18/JavaWeb/" data-title="Hexo" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -180,19 +191,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/08/18/JavaWeb/" title="">
-  <strong>上一篇：</strong><br/>
-  <span>
-  (no title)</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/07/18/javascript/"  title="javascript">
+<a href="/2016/07/18/Hadoop安装配置/"  title="Hadoop安装配置">
  <strong>下一篇：</strong><br/> 
- <span>javascript
+ <span>Hadoop安装配置
 </span>
 </a>
 </div>
@@ -207,7 +210,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-配置hadoop"><span class="toc-number">1.</span> <span class="toc-text">1.配置hadoop</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6启动HDFS和YARN"><span class="toc-number">1.1.</span> <span class="toc-text">1.6启动HDFS和YARN</span></a></li></ol></li></ol>
+ 
  
   </div>
 
