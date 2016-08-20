@@ -81,14 +81,14 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/08/18/JavaWeb/" title="Servlet" itemprop="url">Servlet</a>
+      <a href="/2016/08/18/JavaWeb/" title="" itemprop="url"></a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Chen xigong" target="_blank" itemprop="author">Chen xigong</a>
 		
   <p class="article-time">
-    <time datetime="2016-08-18T10:32:00.000Z" itemprop="datePublished"> 发表于 2016-08-18</time>
+    <time datetime="2016-08-18T10:23:33.182Z" itemprop="datePublished"> 发表于 2016-08-18</time>
     
   </p>
 </header>
@@ -150,10 +150,29 @@
 </code></pre><p>2.获取初始化参数：  </p>
 <blockquote>
 <p>getInitParameter(String name) :获取指定参数名的初始化参数<br>getInitParameterName() :获取参数名组成的Enumeration对象</p>
-<h2 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h2><p>java代码写在<br>&lt;%<br>%&gt;<br>里面</p>
 </blockquote>
 </li>
 </ul>
+<h2 id="ServletContext接口"><a href="#ServletContext接口" class="headerlink" title="ServletContext接口"></a>ServletContext接口</h2><ol>
+<li>可以由ServletConfig 获取  </li>
+<li><p>该对象代表当前WEB应用：可以认为ServletContext是当前WEB应用的一个大管家。可以从中获取到当前Web应用的各个方面的信息。<br>2.1 获取当前WEB应用的初始化参数(可以为所有的Servlet所获取，而Servlet的初始化参数只用那个Servlet可以获取。)  </p>
+ <!--配置当前WEB应用的初始化参数-->
+<p> <context-param>  </context-param></p>
+<pre><code>&lt;param-name&gt;dirver&lt;/param-name&gt;  
+&lt;param-value&gt;nuc.sw.cxg&lt;/param-value&gt;
+</code></pre><p> <br>方法:<br><code>getInitParameter</code><br><code>getInitParameterNames</code><br><code>ServletContext servletContext = servletConfig.getServletContext();</code><br>2.2 获取当前WEB应用的某一文件在服务器上的绝对路径，而不是部署前的路径：<br>getRealPath(String path)<br>2.3 获取当前WEB应用的名称：<br><code>getContextPath()</code><br>2.4 获取当前WEB应用的某一文件对应的输入流：<br>getResourceAsStream(String path):path的/为当前WEB应用的根目录。<br>2.5 和attribute相关的几个方法</p>
+<h2 id="如何再Servlet中获取请求信息"><a href="#如何再Servlet中获取请求信息" class="headerlink" title="如何再Servlet中获取请求信息"></a>如何再Servlet中获取请求信息</h2></li>
+<li>Servlet的servlet() 方法用于应答请求：因为每次请求都会调用servlet()方法。<br><code>public void service(ServletRequest request.ServletResponse response)</code><br>ServletRequest:封装了请求信息。可以从中获取到任何的请求信息。<br>ServletResponse:封装了相应信息，如果想给用户什么响应，具体可以使用该接口的方法实现。<br>这两个接口的实现类都是服务器给予实现的，并在服务器调用service方法时调入。  </li>
+<li><p>Servlet Request：<br>2.1 获取请求参数    </p>
+<pre><code>1.String getParameter(String name)  根据请求参数的名字，返回参数值。 
+  请求参数有多个值（例如checkbox），该方法只能获取第一个提交的值。 
+2.String[] getParameterValues(String name) 根据请求参数的名字，返回请求参数对应的字符串数组  
+3.Map getParameterMap()  返回请求参数的键值对：key:参数名，value:参数值，String数组类型
+4.Enumeration getParameterNames()    返回参数名对应的Enumeration对象，类似于ServletContext(或ServletConfig)的getInitParameterNames()方法。  
+</code></pre><p>2.2 获取请求URL  httpServletRequest.getRequestURI()　　<br>2.3 获取请求方式     httpServletRequest.getMethod()<br>2.4 获取请求方式为get时，请求参数对应的那个字符串，即？后的那个字符串<br>httpServletRequest.getQueryString()<br>2.5 获取请求的Servlet的映射路径    httpServletRequest.getServletPath()<br>2.6 和attribute相关的几个方法</p>
+</li>
+<li>httpServletRequest:是ServletRequest的子接口。针对于HTTP请求所定义。里面包含了大量获取HTTP请求相关的方法。        </li>
+</ol>
 
         
         
