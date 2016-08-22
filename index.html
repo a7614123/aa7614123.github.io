@@ -258,7 +258,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/07/18/Hadoop安装配置/" title="Hadoop安装配置" itemprop="url">Hadoop安装配置</a>
+      <a href="/2016/07/18/Hadoop伪分布安装配置/" title="Hadoop伪分布安装配置" itemprop="url">Hadoop伪分布安装配置</a>
   </h1>
   <p class="article-author">By
        
@@ -310,9 +310,16 @@ HOSTNAME=master
 <h1 id="配置hadoop"><a href="#配置hadoop" class="headerlink" title="配置hadoop"></a>配置hadoop</h1><h2 id="上传hadoop包"><a href="#上传hadoop包" class="headerlink" title="上传hadoop包"></a>上传hadoop包</h2><h2 id="解压hadoop包"><a href="#解压hadoop包" class="headerlink" title="解压hadoop包"></a>解压hadoop包</h2><p>首先在跟目录下创建一个master目录  </p>
 <p><code>mkdir /master</code>  </p>
 <p><code>tar -zxvf hadoop-2.2.0.tar.gz -C /</code>  </p>
-<h2 id="配置hadoop伪分布式（要修改5个文件）"><a href="#配置hadoop伪分布式（要修改5个文件）" class="headerlink" title="配置hadoop伪分布式（要修改5个文件）"></a>配置hadoop伪分布式（要修改5个文件）</h2><p><strong>第一个: <code>hadoop-env.sh</code></strong><br><code>vim hadoop-env.sh</code><br>&nbsp;&nbsp; <code>export JAVA_HOME=/opt/jdk1.7.0_45</code>  </p>
-<p><strong>第二个：<code>core-site.xml</code></strong><br>vim core-site.xml<br>    <configuration><br>        <!--用来指定HDFS的老大（namenode）的地址--><br>        <property><br>            <name>fs.defaultFS</name><br>            <value>hdfs://master:9000</value><br>        </property></configuration></p>
-<pre><code>    &lt;!-- 用来指定hadoop运行时产生文件的存放目录 --&gt;
+<h2 id="配置hadoop伪分布式（要修改5个文件）"><a href="#配置hadoop伪分布式（要修改5个文件）" class="headerlink" title="配置hadoop伪分布式（要修改5个文件）"></a>配置hadoop伪分布式（要修改5个文件）</h2><p><strong>第一个: <code>hadoop-env.sh</code></strong><br><code>vim hadoop-env.sh</code><br><code>export JAVA_HOME=/opt/jdk1.7.0_45</code>  </p>
+<p><strong>第二个：<code>core-site.xml</code></strong><br><code>vim core-site.xml</code>  </p>
+<pre><code>&lt;configuration&gt;
+    &lt;!--用来指定HDFS的老大（namenode）的地址--&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.defaultFS&lt;/name&gt;
+        &lt;value&gt;hdfs://master:9000&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 用来指定hadoop运行时产生文件的存放目录 --&gt;
     &lt;property&gt;    
         &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
         &lt;value&gt;/master/hadoop-2.2.0/tmp&lt;/value&gt;
