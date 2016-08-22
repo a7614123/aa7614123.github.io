@@ -303,7 +303,7 @@ HOSTNAME=master
 192.168.187.102    slave2
 </code></pre><h1 id="5-创建hadoop用户"><a href="#5-创建hadoop用户" class="headerlink" title="5.创建hadoop用户"></a>5.创建hadoop用户</h1><p><code>adduser hadoop</code><br><code>passwd hadoop</code>  </p>
 <h3 id="转到hadoop用户下"><a href="#转到hadoop用户下" class="headerlink" title="转到hadoop用户下"></a>转到hadoop用户下</h3><p> <code>cd /home/hadoop</code>    </p>
-<h2 id="6-配置SSH免密码登录"><a href="#6-配置SSH免密码登录" class="headerlink" title="6.配置SSH免密码登录"></a>6.配置SSH免密码登录</h2><p>创建.ssh<br><code>ssh 192.168.187.100</code><br><code>cd.ssh</code>  </p>
+<h1 id="6-配置SSH免密码登录"><a href="#6-配置SSH免密码登录" class="headerlink" title="6.配置SSH免密码登录"></a>6.配置SSH免密码登录</h1><p>创建.ssh<br><code>ssh 192.168.187.100</code><br><code>cd.ssh</code>  </p>
 <h2 id="6-1-生成ssh免登录密钥"><a href="#6-1-生成ssh免登录密钥" class="headerlink" title="6.1 生成ssh免登录密钥"></a>6.1 生成ssh免登录密钥</h2><p>创建密钥对<br>首先进入.ssh<br><code>ssh-keygen -t rsa</code><br>执行完这个命令后，会生成两个文件id_rsa(私钥)，id_rsa.pub(公钥)<br>将公钥拷贝到要免密码登陆的机器上<br><code>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code><br>或<br><code>ssh-copy-id master</code>    </p>
 <h1 id="7-配置JDK"><a href="#7-配置JDK" class="headerlink" title="7. 配置JDK"></a>7. 配置JDK</h1><h2 id="7-1-上传JDK包"><a href="#7-1-上传JDK包" class="headerlink" title="7.1 上传JDK包"></a>7.1 上传JDK包</h2><h2 id="7-2-解压JDK包"><a href="#7-2-解压JDK包" class="headerlink" title="7.2 解压JDK包"></a>7.2 解压JDK包</h2><p><code>tar -zxvf jdk-7u45-linux-x64.tar.gz -C /解压到的地址</code>  </p>
 <h2 id="7-3-配置jdk环境变量"><a href="#7-3-配置jdk环境变量" class="headerlink" title="7.3 配置jdk环境变量"></a>7.3 配置jdk环境变量</h2><p> <code>vi /etc/profile</code><br>在文件末尾添加：<br>    export JAVA_HOME=/opt/jdk1.7.0_45<br>    export PATH=$PATH:$JAVA_HOME/bin<br>刷新配置：<code>source /etc/profile</code></p>
