@@ -17,7 +17,7 @@
 <meta property="og:url" content="http://chenxigong.top/2016/07/18/Hadoop安装配置/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="1.配置hadoop 1.1上传hadoop包 1.2解压hadoop包 1.3配置hadoop伪分布式（要修改5个文件） 1.4将Hadoop添加到环境变量中 1.5初始化HDFS（格式化文件系统） 1.6启动HDFS和YARN 1.7测试HDFS 1.8测试MR和YARN  1.9配置SSH免密码登录">
-<meta property="og:updated_time" content="2016-08-22T11:27:18.697Z">
+<meta property="og:updated_time" content="2016-08-22T11:32:35.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hadoop安装配置">
 <meta name="twitter:description" content="1.配置hadoop 1.1上传hadoop包 1.2解压hadoop包 1.3配置hadoop伪分布式（要修改5个文件） 1.4将Hadoop添加到环境变量中 1.5初始化HDFS（格式化文件系统） 1.6启动HDFS和YARN 1.7测试HDFS 1.8测试MR和YARN  1.9配置SSH免密码登录">
@@ -100,9 +100,9 @@
 		
 		</div>
 		
-		<h1 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h1><p>先将linux的防火墙关闭<br><strong>1) 重启后生效</strong><br>开启： chkconfig iptables on<br>关闭： chkconfig iptables off   关闭开机启动</p>
-<p><strong>2) 即时生效，重启后失效</strong><br>开启： service iptables start<br>关闭： service iptables stop  </p>
-<p><strong>3) 查看防火墙状态</strong><br>service iptables status </p>
+		<h1 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h1><p>先将linux的防火墙关闭<br><strong>1) 重启后生效</strong><br>开启： <code>chkconfig iptables on</code><br>关闭： <code>chkconfig iptables off</code>   关闭开机启动</p>
+<p><strong>2) 即时生效，重启后失效</strong><br>开启： <code>service iptables start</code><br>关闭： <code>service iptables stop</code>  </p>
+<p><strong>3) 查看防火墙状态</strong><br><code>service iptables status</code> </p>
 <h1 id="修改IP"><a href="#修改IP" class="headerlink" title="修改IP"></a>修改IP</h1><p><code>vi /etc/sysconfig/network-scripts/ifcfg-eth0</code>  </p>
 <pre><code>iiDEVICE=eth0
 TYPE=Ethernet
@@ -177,15 +177,19 @@ HOSTNAME=master
         &lt;value&gt;master&lt;/value&gt;
     &lt;/property&gt;
 &lt;/configuration&gt;   
-</code></pre><h2 id="将Hadoop添加到环境变量中"><a href="#将Hadoop添加到环境变量中" class="headerlink" title="将Hadoop添加到环境变量中"></a>将Hadoop添加到环境变量中</h2><p>export HADOOP_HOME=/master/hadoop-2.2.0<br>export JAVA_HOME=/opt/jdk1.7.0_45<br>export JRE_HOME=$JAVA_HOME/jre<br>export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH<br>export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH:$HADOOP_HOME/bin  </p>
-<p><strong>刷新配置</strong><br>source /etc/profile  </p>
-<h2 id="初始化HDFS（格式化文件系统）"><a href="#初始化HDFS（格式化文件系统）" class="headerlink" title="初始化HDFS（格式化文件系统）"></a>初始化HDFS（格式化文件系统）</h2><p>hadoop namenode -format(过时了)<br>hdfs namenode -format   </p>
-<h2 id="启动HDFS和YARN"><a href="#启动HDFS和YARN" class="headerlink" title="启动HDFS和YARN"></a>启动HDFS和YARN</h2><p>./start-all.sh(过时了This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh) </p>
+</code></pre><h2 id="将Hadoop添加到环境变量中"><a href="#将Hadoop添加到环境变量中" class="headerlink" title="将Hadoop添加到环境变量中"></a>将Hadoop添加到环境变量中</h2><pre><code>export HADOOP_HOME=/master/hadoop-2.2.0  
+export JAVA_HOME=/opt/jdk1.7.0_45  
+export JRE_HOME=$JAVA_HOME/jre  
+export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH  
+export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH:$HADOOP_HOME/bin  
+</code></pre><p><strong>刷新配置</strong><br><code>source /etc/profile</code>  </p>
+<h2 id="初始化HDFS（格式化文件系统）"><a href="#初始化HDFS（格式化文件系统）" class="headerlink" title="初始化HDFS（格式化文件系统）"></a>初始化HDFS（格式化文件系统）</h2><p><code>hadoop namenode -format(过时了)</code><br><code>hdfs namenode -format</code>   </p>
+<h2 id="启动HDFS和YARN"><a href="#启动HDFS和YARN" class="headerlink" title="启动HDFS和YARN"></a>启动HDFS和YARN</h2><p><code>./start-all.sh(过时了This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh)</code> </p>
 <p>有个小问题（需要多次输入密码）</p>
 <p><strong>通过浏览器的方式验证</strong>  </p>
 <p><a href="http://192.168.187.185:50070(hdfs管理界面" target="_blank" rel="external">http://192.168.187.185:50070(hdfs管理界面</a>)<br><a href="http://192.168.187.185:50030" target="_blank" rel="external">http://192.168.187.185:50030</a><br><a href="http://192.168.187.185:8088(yarn管理界面" target="_blank" rel="external">http://192.168.187.185:8088(yarn管理界面</a>)  </p>
-<h2 id="测试HDFS"><a href="#测试HDFS" class="headerlink" title="测试HDFS"></a>测试HDFS</h2><p><strong>上传文件到HDFS</strong><br>hadoop fs -put /opt/jdk-7u45-linux-x64.tar.gz hdfs://master:9000/jdk</p>
-<p><strong>从HDFS下载文件到本地</strong><br>hadoop fs -get hdfs://master:9000/jdk /home/jdk1.7 </p>
+<h2 id="测试HDFS"><a href="#测试HDFS" class="headerlink" title="测试HDFS"></a>测试HDFS</h2><p><strong>上传文件到HDFS</strong><br><code>hadoop fs -put /opt/jdk-7u45-linux-x64.tar.gz hdfs://master:9000/jdk</code></p>
+<p><strong>从HDFS下载文件到本地</strong><br><code>hadoop fs -get hdfs://master:9000/jdk /home/jdk1.7</code> </p>
 <h2 id="测试MR和YARN"><a href="#测试MR和YARN" class="headerlink" title="测试MR和YARN"></a>测试MR和YARN</h2>  
 	</div>
 		<footer class="article-footer clearfix">
