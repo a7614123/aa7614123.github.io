@@ -81,7 +81,7 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/08/20/JavaWeb/" title="JavaWeb" itemprop="url">JavaWeb</a>
+      <a href="/2016/08/20/搭建大数据集群方案/" title="搭建大数据集群方案" itemprop="url">搭建大数据集群方案</a>
   </h1>
   <p class="article-author">By
        
@@ -89,6 +89,55 @@
 		
   <p class="article-time">
     <time datetime="2016-08-20T03:22:45.000Z" itemprop="datePublished"> 发表于 2016-08-20</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="搭建大数据集群方案"><a href="#搭建大数据集群方案" class="headerlink" title="搭建大数据集群方案"></a>搭建大数据集群方案</h1><h3 id="1-规划：一个主节点，两个数据节点"><a href="#1-规划：一个主节点，两个数据节点" class="headerlink" title="1.规划：一个主节点，两个数据节点"></a>1.规划：一个主节点，两个数据节点</h3><h3 id="2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"><a href="#2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户" class="headerlink" title="2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"></a>2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户</h3><h3 id="3-上传hadoop程序包，设置工作目录和权限，然后解压缩。"><a href="#3-上传hadoop程序包，设置工作目录和权限，然后解压缩。" class="headerlink" title="3.上传hadoop程序包，设置工作目录和权限，然后解压缩。"></a>3.上传hadoop程序包，设置工作目录和权限，然后解压缩。</h3><h3 id="4-配置文件设置"><a href="#4-配置文件设置" class="headerlink" title="4.配置文件设置"></a>4.配置文件设置</h3><h3 id="5-格式化，初始化"><a href="#5-格式化，初始化" class="headerlink" title="5.格式化，初始化"></a>5.格式化，初始化</h3><h3 id="6-启动集群"><a href="#6-启动集群" class="headerlink" title="6.启动集群"></a>6.启动集群</h3>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/08/18/JavaWeb/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Chen xigong" target="_blank" itemprop="author">Chen xigong</a>
+		
+  <p class="article-time">
+    <time datetime="2016-08-18T10:23:33.182Z" itemprop="datePublished"> 发表于 2016-08-18</time>
     
   </p>
 </header>
@@ -166,209 +215,67 @@
 <li><p>Servlet Request：<br>2.1 获取请求参数    </p>
 <pre><code>1.String getParameter(String name)  根据请求参数的名字，返回参数值。 
   请求参数有多个值（例如checkbox），该方法只能获取第一个提交的值。 
-2.String[] getParameterValues(String name) 根据请求参数的名字，返回请求参数对应的字符串数组  
+2.String[] getParameterValues(String name) 根据请求参数的名字，返回请求参数对应的字符 串数组  
 3.Map getParameterMap()  返回请求参数的键值对：key:参数名，value:参数值，String数组类型
 4.Enumeration getParameterNames()    返回参数名对应的Enumeration对象，类似于ServletContext(或ServletConfig)的getInitParameterNames()方法。  
 </code></pre><p>2.2 获取请求URL  httpServletRequest.getRequestURI()　　<br>2.3 获取请求方式     httpServletRequest.getMethod()<br>2.4 获取请求方式为get时，请求参数对应的那个字符串，即？后的那个字符串<br>httpServletRequest.getQueryString()<br>2.5 获取请求的Servlet的映射路径    httpServletRequest.getServletPath()<br>2.6 和attribute相关的几个方法</p>
 </li>
 <li>httpServletRequest:是ServletRequest的子接口。针对于HTTP请求所定义。里面包含了大量获取HTTP请求相关的方法。        </li>
 </ol>
+<h2 id="ServletResponse"><a href="#ServletResponse" class="headerlink" title="ServletResponse"></a>ServletResponse</h2><p>ServletResponse:封装了相应信息，如果想给用户什么响应，具体可以使用该接口的方法实现。  </p>
+<ol>
+<li>getWriter():返回PrintWriter 对象。调用该对象的print()方法，将把print() 中的参数直接打印到客户的浏览器上。  </li>
+<li>设置响应的内容类型： <code>response.setContentType(&quot;spplication/msword&quot;)</code>  </li>
+<li>void sendRedirect(String location):请求重定向（此方法为HttpServletResponse 中定义。）   </li>
+</ol>
+<hr>
+<p>例：在web.xml 文件中设置两个WEB应用的初始化参数，user，password<br>定义一个login.html 里面定义两个请求字段：user，password<br>再创建一个LoginServlet，在其中获取请求的user，password，对比其和web.xml文件中定义的请求参数是否一致，若一致响应Hello：xxx，若不一致，响应Sorry：xxx   xxx为user </p>
+<hr>
+<h2 id="GennericServlet"><a href="#GennericServlet" class="headerlink" title="GennericServlet"></a>GennericServlet</h2><ol>
+<li>是一个Servlet ，是Servlet接口和ServletConfig 接口的实现类，但是一个抽象类，其中的servive方法为抽象方法。  </li>
+<li>如果新建的 Servlet 程序直接继承 GenericServlet 会使开发更简洁。  </li>
+<li>具体实现：<br>3.1 在GennericServlet 中声明了一个ServletConfig 类型的成员变量，在init(ServletConfig)方法中对其进行了初始化。<br>3.2 利用servletConfig 成员变量的方法实现了 ServletConfig 接口的方法。<br>3.3 还定义了一个init()方法。在init(ServletConfig)方法中对其进行调用，子类可以直接覆盖init()在其中实现对Servlet的初始化。<br>3.4 不建议直接覆盖init(ServletConfig)，因为如果忘记编写super(ServletConfig),而还是用了ServletConfig接口的方法，则会出现空指针异常。<br>3.5 新建的init(){}方法并非Servlet的生命周期方法，而init(ServletConfig)方法是相关的生命周期方法。   </li>
+</ol>
+<h2 id="HttpServlet"><a href="#HttpServlet" class="headerlink" title="HttpServlet:"></a>HttpServlet:</h2><ol>
+<li>是一个Servlet ，继承自GenericServlet。针对于HTTP协议所定制。  </li>
+<li>在service() 方法中直接把ServletRequest 和ServletResponse 转为HttpServletRequest和HttpServletResponse 。并调用了重载的service(HttpServletRequest,HttpServletResponse)  </li>
+<li>在 service(HttpServletRequest,HttpServletResponse)获取了请求方式：request.getMethod().doXxx()方法（xxx为具体的请求方式，比如doGet，doPost）  </li>
+<li>实际开发中，直接继承HttpServlet，并根据请求方式复写doXxx()方法接口。  </li>
+<li>好处：直接针对性的覆盖doXxx()方法；直接使用HttpServletRequest和HttpServletResponse，不需要强转。  </li>
+</ol>
+<h2 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h2><ol>
+<li>JSP是简化Servlet 编写的一种技术。将Java代码和HTML语句混合在同一个文件中编写，只对网页中的要动态产生的内容采用Java代码来编写，而对固定不变的静态内容采用普通静态HTML页面方式编写。  </li>
+<li>JSP不能放置在WEB-INF及其子目录下。</li>
+<li>JSP的运行原理：JSP本质上是一个Servlet  </li>
+<li>Java Server Page:java 服务器端网页</li>
+</ol>
+<h3 id="JSP页面的隐含变量-共9个"><a href="#JSP页面的隐含变量-共9个" class="headerlink" title="JSP页面的隐含变量(共9个)"></a>JSP页面的隐含变量(共9个)</h3><p>隐含变量即没有声明就可以使用的变量。<br>requset , response , pageContext , session , application , config , out , page , exception  </p>
+<ol>
+<li>request: HttpServletRequest 的一个对象。  </li>
+<li>response: HttpServletResponse 的一个对象(在JSP页面几乎不会调用response的任何方法)。  </li>
+<li>pageContext： 页面的上下文，是PageContext 的一个对象。可以从该对象中获取到其他8个隐含对象，也可以获取到当前页面的其他信息（自定义标签时使用）。  </li>
+<li>session:代表浏览器和服务器的一次会话， 是HttpSession 的一个对象。  </li>
+<li>application: 代表当前WEB应用。是ServletContext 对象。  </li>
+<li><p>config： 当前JSP对应的Servlet的ServletConfig对象(几乎不使用)。若需要访问当前JSP配置的初始化参数，需要通过映射的地址才可以。    </p>
+<pre><code>映射JSP  
+ &lt;servlet&gt;  
+    &lt;servlet-name&gt;hellojsp&lt;/servlet-name&gt;  
+    &lt;jsp-file&gt;/hello.jsp&lt;/jsp-file&gt;
+    &lt;init-param&gt;  
+        &lt;!--参数名--&gt;
+        &lt;param-name&gt;user&lt;/param-name&gt;  
+        &lt;!--参数值--&gt;
+        &lt;param-value&gt;root&lt;/param-value&gt;
+    &lt;/init-param&gt;  
+ &lt;/servlet&gt;  
+ &lt;servlet-mapping&gt;  
+    &lt;servlet-name&gt;hellojsp&lt;/servlet-name&gt;  
+    &lt;url-pattern&gt;/hellojsp&lt;/url-pattern&gt;
+ &lt;servlet-mapping&gt;
+</code></pre></li>
+</ol>
+<p>7.out: JspWriter 对象。调用out.println()可以直接把字符串打印到浏览器上。<br>8.page: 指向当前JSP对应的Servlet对象的引用，但为Object类型，只能调用Object类的方法。几乎不使用。<br>9.exception: 只有声明了page 指令的 isErrorPage=”true” 时才可使用。<br><code>&lt;% page isErrorPage=&quot;true&quot; %&gt;</code><br>pageContext,requset,session,application（对属性的作用域的范围从小到大）</p>
 
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/08/20/搭建大数据集群方案/" title="搭建大数据集群方案" itemprop="url">搭建大数据集群方案</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chen xigong" target="_blank" itemprop="author">Chen xigong</a>
-		
-  <p class="article-time">
-    <time datetime="2016-08-20T03:22:45.000Z" itemprop="datePublished"> 发表于 2016-08-20</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="搭建大数据集群方案"><a href="#搭建大数据集群方案" class="headerlink" title="搭建大数据集群方案"></a>搭建大数据集群方案</h1><h3 id="1-规划：一个主节点，两个数据节点"><a href="#1-规划：一个主节点，两个数据节点" class="headerlink" title="1.规划：一个主节点，两个数据节点"></a>1.规划：一个主节点，两个数据节点</h3><h3 id="2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"><a href="#2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户" class="headerlink" title="2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"></a>2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户</h3><h3 id="3-上传hadoop程序包，设置工作目录和权限，然后解压缩。"><a href="#3-上传hadoop程序包，设置工作目录和权限，然后解压缩。" class="headerlink" title="3.上传hadoop程序包，设置工作目录和权限，然后解压缩。"></a>3.上传hadoop程序包，设置工作目录和权限，然后解压缩。</h3><h3 id="4-配置文件设置"><a href="#4-配置文件设置" class="headerlink" title="4.配置文件设置"></a>4.配置文件设置</h3><h3 id="5-格式化，初始化"><a href="#5-格式化，初始化" class="headerlink" title="5.格式化，初始化"></a>5.格式化，初始化</h3><h3 id="6-启动集群"><a href="#6-启动集群" class="headerlink" title="6.启动集群"></a>6.启动集群</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/07/18/Hadoop伪分布安装配置/" title="Hadoop伪分布安装配置" itemprop="url">Hadoop伪分布安装配置</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="Chen xigong" target="_blank" itemprop="author">Chen xigong</a>
-		
-  <p class="article-time">
-    <time datetime="2016-07-18T11:36:16.000Z" itemprop="datePublished"> 发表于 2016-07-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h1 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h1><p>先将linux的防火墙关闭<br><strong>1) 重启后生效</strong><br>开启： <code>chkconfig iptables on</code><br>关闭： <code>chkconfig iptables off</code>   关闭开机启动</p>
-<p><strong>2) 即时生效，重启后失效</strong><br>开启： <code>service iptables start</code><br>关闭： <code>service iptables stop</code>  </p>
-<p><strong>3) 查看防火墙状态</strong><br><code>service iptables status</code> </p>
-<h1 id="修改IP"><a href="#修改IP" class="headerlink" title="修改IP"></a>修改IP</h1><p><code>vi /etc/sysconfig/network-scripts/ifcfg-eth0</code>  </p>
-<pre><code>iiDEVICE=eth0
-TYPE=Ethernet
-UUID=d78eebc7-cea9-44ce-a4ff-b6d55092093c
-ONBOOT=yes
-NM_CONTROLLED=yes
-BOOTPROTO=static  ##
-NETMASK=255.255.255.0  ##
-IPADDR=192.168.187.100  ##
-GATEWAY=192.168.187.1  ##
-PREFIX=24
-DEFROUTE=yes
-IPV4_FAILURE_FATAL=yes
-IPV6INIT=no
-NAME=&quot;System eth0&quot;
-HWADDR=00:0C:29:7A:7C:58
-LAST_CONNECT=1471689748
-</code></pre><h1 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h1><p><code>vi /etc/sysconfig/network</code>  </p>
-<pre><code>NETWORKING=yes
-HOSTNAME=master  
-</code></pre><p>查看主机名 <code>hostname</code></p>
-<h1 id="修改主机名和ip地址的映射关系"><a href="#修改主机名和ip地址的映射关系" class="headerlink" title="修改主机名和ip地址的映射关系"></a>修改主机名和ip地址的映射关系</h1><p><code>vi /etc/hosts</code>  </p>
-<pre><code>127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
-::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
-192.168.187.100    master
-192.168.187.101    slave1
-192.168.187.102    slave2
-</code></pre><h1 id="创建hadoop用户"><a href="#创建hadoop用户" class="headerlink" title="创建hadoop用户"></a>创建hadoop用户</h1><p><code>adduser hadoop</code><br><code>passwd hadoop</code>  </p>
-<h3 id="转到hadoop用户下"><a href="#转到hadoop用户下" class="headerlink" title="转到hadoop用户下"></a>转到hadoop用户下</h3><p> <code>cd /home/hadoop</code>    </p>
-<h1 id="配置SSH免密码登录"><a href="#配置SSH免密码登录" class="headerlink" title="配置SSH免密码登录"></a>配置SSH免密码登录</h1><p>创建.ssh<br><code>ssh 192.168.187.100</code><br><code>cd.ssh</code>  </p>
-<h2 id="生成ssh免登录密钥"><a href="#生成ssh免登录密钥" class="headerlink" title="生成ssh免登录密钥"></a>生成ssh免登录密钥</h2><p>创建密钥对<br>首先进入.ssh<br><code>ssh-keygen -t rsa</code><br>执行完这个命令后，会生成两个文件id_rsa(私钥)，id_rsa.pub(公钥)<br>将公钥拷贝到要免密码登陆的机器上<br><code>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code><br>或<br><code>ssh-copy-id master</code>    </p>
-<h1 id="配置JDK"><a href="#配置JDK" class="headerlink" title="配置JDK"></a>配置JDK</h1><h2 id="上传JDK包"><a href="#上传JDK包" class="headerlink" title="上传JDK包"></a>上传JDK包</h2><h2 id="解压JDK包"><a href="#解压JDK包" class="headerlink" title="解压JDK包"></a>解压JDK包</h2><p><code>tar -zxvf jdk-7u45-linux-x64.tar.gz -C /解压到的地址</code>  </p>
-<h2 id="配置jdk环境变量"><a href="#配置jdk环境变量" class="headerlink" title="配置jdk环境变量"></a>配置jdk环境变量</h2><p> <code>vi /etc/profile</code><br>在文件末尾添加：<br>    export JAVA_HOME=/opt/jdk1.7.0_45<br>    export PATH=$PATH:$JAVA_HOME/bin<br>刷新配置：<code>source /etc/profile</code></p>
-<h1 id="配置hadoop"><a href="#配置hadoop" class="headerlink" title="配置hadoop"></a>配置hadoop</h1><h2 id="上传hadoop包"><a href="#上传hadoop包" class="headerlink" title="上传hadoop包"></a>上传hadoop包</h2><h2 id="解压hadoop包"><a href="#解压hadoop包" class="headerlink" title="解压hadoop包"></a>解压hadoop包</h2><p>首先在跟目录下创建一个master目录  </p>
-<p><code>mkdir /master</code>  </p>
-<p><code>tar -zxvf hadoop-2.2.0.tar.gz -C /</code>  </p>
-<h2 id="配置hadoop伪分布式（要修改5个文件）"><a href="#配置hadoop伪分布式（要修改5个文件）" class="headerlink" title="配置hadoop伪分布式（要修改5个文件）"></a>配置hadoop伪分布式（要修改5个文件）</h2><p><strong>第一个: <code>hadoop-env.sh</code></strong><br><code>vim hadoop-env.sh</code><br><code>export JAVA_HOME=/opt/jdk1.7.0_45</code>  </p>
-<p><strong>第二个：<code>core-site.xml</code></strong><br><code>vim core-site.xml</code>  </p>
-<pre><code>&lt;configuration&gt;
-    &lt;!--用来指定HDFS的老大（namenode）的地址--&gt;
-    &lt;property&gt;
-        &lt;name&gt;fs.defaultFS&lt;/name&gt;
-        &lt;value&gt;hdfs://master:9000&lt;/value&gt;
-    &lt;/property&gt;
-
-    &lt;!-- 用来指定hadoop运行时产生文件的存放目录 --&gt;
-    &lt;property&gt;    
-        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
-        &lt;value&gt;/master/hadoop-2.2.0/tmp&lt;/value&gt;
-    &lt;/property&gt;
-&lt;configuration&gt;
-</code></pre><p><strong>第三个:<code>hdfs-site.xml</code></strong>  </p>
-<pre><code>&lt;configuration&gt;
-    &lt;!--用来指定HDFS保存数据副本的数量--&gt;
-    &lt;property&gt;
-        &lt;name&gt;dfs.replication&lt;/name&gt;
-        &lt;value&gt;1&lt;/value&gt;
-    &lt;/property&gt;
-&lt;configuration&gt;
-</code></pre><p><strong>第四个：<code>mapred-site.xml(mv mapred-site.xml.template mapred-site.xml)</code></strong>  </p>
-<pre><code>&lt;configuration&gt;  
-
-    &lt;！-- 告诉hadoop以后MR运行在YARN上 --&gt;
-    &lt;property&gt;
-        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
-        &lt;value&gt;yarn&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;
-</code></pre><p><strong>第五个：<code>yarn-site.xml</code></strong>  </p>
-<pre><code>&lt;configuration&gt;  
-    &lt;!-- NodeManager获取数据的方式是shuffle --&gt;
-    &lt;property&gt;
-        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
-        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
-    &lt;/property&gt;
-    &lt;!-- 指定YARN的老大（ResourceManager）的地址 --&gt;
-    &lt;property&gt;
-        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
-        &lt;value&gt;master&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;   
-</code></pre><h2 id="将Hadoop添加到环境变量中"><a href="#将Hadoop添加到环境变量中" class="headerlink" title="将Hadoop添加到环境变量中"></a>将Hadoop添加到环境变量中</h2><pre><code>export HADOOP_HOME=/master/hadoop-2.2.0  
-export JAVA_HOME=/opt/jdk1.7.0_45  
-export JRE_HOME=$JAVA_HOME/jre  
-export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH  
-export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH:$HADOOP_HOME/bin  
-</code></pre><p><strong>刷新配置</strong><br><code>source /etc/profile</code>  </p>
-<h2 id="初始化HDFS（格式化文件系统）"><a href="#初始化HDFS（格式化文件系统）" class="headerlink" title="初始化HDFS（格式化文件系统）"></a>初始化HDFS（格式化文件系统）</h2><p><code>hadoop namenode -format(过时了)</code><br><code>hdfs namenode -format</code>   </p>
-<h2 id="启动HDFS和YARN"><a href="#启动HDFS和YARN" class="headerlink" title="启动HDFS和YARN"></a>启动HDFS和YARN</h2><p><code>./start-all.sh(过时了This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh)</code> </p>
-<p>有个小问题（需要多次输入密码）</p>
-<p><strong>通过浏览器的方式验证</strong>  </p>
-<p><a href="http://192.168.187.185:50070(hdfs管理界面" target="_blank" rel="external">http://192.168.187.185:50070(hdfs管理界面</a>)<br><a href="http://192.168.187.185:50030" target="_blank" rel="external">http://192.168.187.185:50030</a><br><a href="http://192.168.187.185:8088(yarn管理界面" target="_blank" rel="external">http://192.168.187.185:8088(yarn管理界面</a>)  </p>
-<h2 id="测试HDFS"><a href="#测试HDFS" class="headerlink" title="测试HDFS"></a>测试HDFS</h2><p><strong>上传文件到HDFS</strong><br><code>hadoop fs -put /opt/jdk-7u45-linux-x64.tar.gz hdfs://master:9000/jdk</code></p>
-<p><strong>从HDFS下载文件到本地</strong><br><code>hadoop fs -get hdfs://master:9000/jdk /home/jdk1.7</code> </p>
-<h2 id="测试MR和YARN"><a href="#测试MR和YARN" class="headerlink" title="测试MR和YARN"></a>测试MR和YARN</h2>
         
         
         <p class="article-more-link">
@@ -517,6 +424,152 @@ function insertAfter(newChild, refChild){
 <p>#14. innerHTML属性:<br>    1). 浏览器几乎都支持该属性, 但不是 DOM 标准的组成部分. innerHTML 属性可以用来读, 写某给定元素里的 HTML 内容    </p>
 <p>#15. 其它属性<br>参看 API: nsextSibling,     previousSibling 等               </p>
 
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/18/Hadoop伪分布安装配置/" title="Hadoop伪分布安装配置" itemprop="url">Hadoop伪分布安装配置</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Chen xigong" target="_blank" itemprop="author">Chen xigong</a>
+		
+  <p class="article-time">
+    <time datetime="2016-07-18T11:36:16.000Z" itemprop="datePublished"> 发表于 2016-07-18</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h1><p>先将linux的防火墙关闭<br><strong>1) 重启后生效</strong><br>开启： <code>chkconfig iptables on</code><br>关闭： <code>chkconfig iptables off</code>   关闭开机启动</p>
+<p><strong>2) 即时生效，重启后失效</strong><br>开启： <code>service iptables start</code><br>关闭： <code>service iptables stop</code>  </p>
+<p><strong>3) 查看防火墙状态</strong><br><code>service iptables status</code> </p>
+<h1 id="修改IP"><a href="#修改IP" class="headerlink" title="修改IP"></a>修改IP</h1><p><code>vi /etc/sysconfig/network-scripts/ifcfg-eth0</code>  </p>
+<pre><code>iiDEVICE=eth0
+TYPE=Ethernet
+UUID=d78eebc7-cea9-44ce-a4ff-b6d55092093c
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=static  ##
+NETMASK=255.255.255.0  ##
+IPADDR=192.168.187.100  ##
+GATEWAY=192.168.187.1  ##
+PREFIX=24
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+NAME=&quot;System eth0&quot;
+HWADDR=00:0C:29:7A:7C:58
+LAST_CONNECT=1471689748
+</code></pre><h1 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h1><p><code>vi /etc/sysconfig/network</code>  </p>
+<pre><code>NETWORKING=yes
+HOSTNAME=master  
+</code></pre><p>查看主机名 <code>hostname</code></p>
+<h1 id="修改主机名和ip地址的映射关系"><a href="#修改主机名和ip地址的映射关系" class="headerlink" title="修改主机名和ip地址的映射关系"></a>修改主机名和ip地址的映射关系</h1><p><code>vi /etc/hosts</code>  </p>
+<pre><code>127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.187.100    master
+192.168.187.101    slave1
+192.168.187.102    slave2
+</code></pre><h1 id="创建hadoop用户"><a href="#创建hadoop用户" class="headerlink" title="创建hadoop用户"></a>创建hadoop用户</h1><p><code>adduser hadoop</code><br><code>passwd hadoop</code>  </p>
+<h3 id="转到hadoop用户下"><a href="#转到hadoop用户下" class="headerlink" title="转到hadoop用户下"></a>转到hadoop用户下</h3><p> <code>cd /home/hadoop</code>    </p>
+<h1 id="配置SSH免密码登录"><a href="#配置SSH免密码登录" class="headerlink" title="配置SSH免密码登录"></a>配置SSH免密码登录</h1><p>创建.ssh<br><code>ssh 192.168.187.100</code><br><code>cd.ssh</code>  </p>
+<h2 id="生成ssh免登录密钥"><a href="#生成ssh免登录密钥" class="headerlink" title="生成ssh免登录密钥"></a>生成ssh免登录密钥</h2><p>创建密钥对<br>首先进入.ssh<br><code>ssh-keygen -t rsa</code><br>执行完这个命令后，会生成两个文件id_rsa(私钥)，id_rsa.pub(公钥)<br>将公钥拷贝到要免密码登陆的机器上<br><code>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code><br>或<br><code>ssh-copy-id master</code>    </p>
+<h1 id="配置JDK"><a href="#配置JDK" class="headerlink" title="配置JDK"></a>配置JDK</h1><h2 id="上传JDK包"><a href="#上传JDK包" class="headerlink" title="上传JDK包"></a>上传JDK包</h2><h2 id="解压JDK包"><a href="#解压JDK包" class="headerlink" title="解压JDK包"></a>解压JDK包</h2><p><code>tar -zxvf jdk-7u45-linux-x64.tar.gz -C /解压到的地址</code>  </p>
+<h2 id="配置jdk环境变量"><a href="#配置jdk环境变量" class="headerlink" title="配置jdk环境变量"></a>配置jdk环境变量</h2><p> <code>vi /etc/profile</code><br>在文件末尾添加：<br>    export JAVA_HOME=/opt/jdk1.7.0_45<br>    export PATH=$PATH:$JAVA_HOME/bin<br>刷新配置：<code>source /etc/profile</code></p>
+<h1 id="配置hadoop"><a href="#配置hadoop" class="headerlink" title="配置hadoop"></a>配置hadoop</h1><h2 id="上传hadoop包"><a href="#上传hadoop包" class="headerlink" title="上传hadoop包"></a>上传hadoop包</h2><h2 id="解压hadoop包"><a href="#解压hadoop包" class="headerlink" title="解压hadoop包"></a>解压hadoop包</h2><p>首先在跟目录下创建一个master目录  </p>
+<p><code>mkdir /master</code>  </p>
+<p><code>tar -zxvf hadoop-2.2.0.tar.gz -C /</code>  </p>
+<h2 id="配置hadoop伪分布式（要修改5个文件）"><a href="#配置hadoop伪分布式（要修改5个文件）" class="headerlink" title="配置hadoop伪分布式（要修改5个文件）"></a>配置hadoop伪分布式（要修改5个文件）</h2><p><strong>第一个: <code>hadoop-env.sh</code></strong><br><code>vim hadoop-env.sh</code><br><code>export JAVA_HOME=/opt/jdk1.7.0_45</code>  </p>
+<p><strong>第二个：<code>core-site.xml</code></strong><br><code>vim core-site.xml</code>  </p>
+<pre><code>&lt;configuration&gt;
+    &lt;!--用来指定HDFS的老大（namenode）的地址--&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.defaultFS&lt;/name&gt;
+        &lt;value&gt;hdfs://master:9000&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 用来指定hadoop运行时产生文件的存放目录 --&gt;
+    &lt;property&gt;    
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;/master/hadoop-2.2.0/tmp&lt;/value&gt;
+    &lt;/property&gt;
+&lt;configuration&gt;
+</code></pre><p><strong>第三个:<code>hdfs-site.xml</code></strong>  </p>
+<pre><code>&lt;configuration&gt;
+    &lt;!--用来指定HDFS保存数据副本的数量--&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;1&lt;/value&gt;
+    &lt;/property&gt;
+&lt;configuration&gt;
+</code></pre><p><strong>第四个：<code>mapred-site.xml(mv mapred-site.xml.template mapred-site.xml)</code></strong>  </p>
+<pre><code>&lt;configuration&gt;  
+
+    &lt;！-- 告诉hadoop以后MR运行在YARN上 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+        &lt;value&gt;yarn&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><p><strong>第五个：<code>yarn-site.xml</code></strong>  </p>
+<pre><code>&lt;configuration&gt;  
+    &lt;!-- NodeManager获取数据的方式是shuffle --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;!-- 指定YARN的老大（ResourceManager）的地址 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
+        &lt;value&gt;master&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;   
+</code></pre><h2 id="将Hadoop添加到环境变量中"><a href="#将Hadoop添加到环境变量中" class="headerlink" title="将Hadoop添加到环境变量中"></a>将Hadoop添加到环境变量中</h2><pre><code>export HADOOP_HOME=/master/hadoop-2.2.0  
+export JAVA_HOME=/opt/jdk1.7.0_45  
+export JRE_HOME=$JAVA_HOME/jre  
+export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH  
+export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH:$HADOOP_HOME/bin  
+</code></pre><p><strong>刷新配置</strong><br><code>source /etc/profile</code>  </p>
+<h2 id="初始化HDFS（格式化文件系统）"><a href="#初始化HDFS（格式化文件系统）" class="headerlink" title="初始化HDFS（格式化文件系统）"></a>初始化HDFS（格式化文件系统）</h2><p><code>hadoop namenode -format(过时了)</code><br><code>hdfs namenode -format</code>   </p>
+<h2 id="启动HDFS和YARN"><a href="#启动HDFS和YARN" class="headerlink" title="启动HDFS和YARN"></a>启动HDFS和YARN</h2><p><code>./start-all.sh(过时了This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh)</code> </p>
+<p>有个小问题（需要多次输入密码）</p>
+<p><strong>通过浏览器的方式验证</strong>  </p>
+<p><a href="http://192.168.187.185:50070(hdfs管理界面" target="_blank" rel="external">http://192.168.187.185:50070(hdfs管理界面</a>)<br><a href="http://192.168.187.185:50030" target="_blank" rel="external">http://192.168.187.185:50030</a><br><a href="http://192.168.187.185:8088(yarn管理界面" target="_blank" rel="external">http://192.168.187.185:8088(yarn管理界面</a>)  </p>
+<h2 id="测试HDFS"><a href="#测试HDFS" class="headerlink" title="测试HDFS"></a>测试HDFS</h2><p><strong>上传文件到HDFS</strong><br><code>hadoop fs -put /opt/jdk-7u45-linux-x64.tar.gz hdfs://master:9000/jdk</code></p>
+<p><strong>从HDFS下载文件到本地</strong><br><code>hadoop fs -get hdfs://master:9000/jdk /home/jdk1.7</code> </p>
+<h2 id="测试MR和YARN"><a href="#测试MR和YARN" class="headerlink" title="测试MR和YARN"></a>测试MR和YARN</h2>
         
         
         <p class="article-more-link">

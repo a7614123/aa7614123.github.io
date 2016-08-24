@@ -23,7 +23,7 @@ Servlet容器可以来创建Servlet，并调用Servlet的相关生命周期方�
 Servlet容器
 Servlet容器为JavaWeb应用提供运行时环境，它负责管理Servlet和JSP的生命周期。以及管理他们的共享数据。
 Servlet容器可以来创建Servlet，并调用Servlet的相关生命周期方法。">
-<meta property="og:updated_time" content="2016-08-20T02:20:49.235Z">
+<meta property="og:updated_time" content="2016-08-24T07:40:43.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="JavaWebjava web 应用中可以包含以下内容1.Servlet2.JSP3.实用类4.静态文本如HTML，图片等5.描述Web应用的信息（web.xml）  
@@ -105,7 +105,7 @@ Servlet容器可以来创建Servlet，并调用Servlet的相关生命周期方�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaWeb"><span class="toc-number">1.</span> <span class="toc-text">JavaWeb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet容器"><span class="toc-number">1.1.</span> <span class="toc-text">Servlet容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-生命周期的方法"><span class="toc-number">1.2.</span> <span class="toc-text">Servlet 生命周期的方法:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#以下方法都是由Servlet容器负责调用"><span class="toc-number">1.2.1.</span> <span class="toc-text">以下方法都是由Servlet容器负责调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#load-on-startup-参数"><span class="toc-number">1.2.2.</span> <span class="toc-text">load-on-startup 参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet-mapping"><span class="toc-number">1.2.3.</span> <span class="toc-text">Servlet-mapping</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet的HelloWorld"><span class="toc-number">1.3.</span> <span class="toc-text">Servlet的HelloWorld</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个Servlet接口的实现类"><span class="toc-number">1.3.1.</span> <span class="toc-text">创建一个Servlet接口的实现类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在web-xml里配置和映射Servlet"><span class="toc-number">1.3.2.</span> <span class="toc-text">在web.xml里配置和映射Servlet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletConfig对象"><span class="toc-number">1.4.</span> <span class="toc-text">ServletConfig对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletContext接口"><span class="toc-number">1.5.</span> <span class="toc-text">ServletContext接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何再Servlet中获取请求信息"><span class="toc-number">1.6.</span> <span class="toc-text">如何再Servlet中获取请求信息</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaWeb"><span class="toc-number">1.</span> <span class="toc-text">JavaWeb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet容器"><span class="toc-number">1.1.</span> <span class="toc-text">Servlet容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-生命周期的方法"><span class="toc-number">1.2.</span> <span class="toc-text">Servlet 生命周期的方法:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#以下方法都是由Servlet容器负责调用"><span class="toc-number">1.2.1.</span> <span class="toc-text">以下方法都是由Servlet容器负责调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#load-on-startup-参数"><span class="toc-number">1.2.2.</span> <span class="toc-text">load-on-startup 参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet-mapping"><span class="toc-number">1.2.3.</span> <span class="toc-text">Servlet-mapping</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet的HelloWorld"><span class="toc-number">1.3.</span> <span class="toc-text">Servlet的HelloWorld</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个Servlet接口的实现类"><span class="toc-number">1.3.1.</span> <span class="toc-text">创建一个Servlet接口的实现类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在web-xml里配置和映射Servlet"><span class="toc-number">1.3.2.</span> <span class="toc-text">在web.xml里配置和映射Servlet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletConfig对象"><span class="toc-number">1.4.</span> <span class="toc-text">ServletConfig对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletContext接口"><span class="toc-number">1.5.</span> <span class="toc-text">ServletContext接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何再Servlet中获取请求信息"><span class="toc-number">1.6.</span> <span class="toc-text">如何再Servlet中获取请求信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletResponse"><span class="toc-number">1.7.</span> <span class="toc-text">ServletResponse</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GennericServlet"><span class="toc-number">1.8.</span> <span class="toc-text">GennericServlet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HttpServlet"><span class="toc-number">1.9.</span> <span class="toc-text">HttpServlet:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP"><span class="toc-number">1.10.</span> <span class="toc-text">JSP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSP页面的隐含变量-共9个"><span class="toc-number">1.10.1.</span> <span class="toc-text">JSP页面的隐含变量(共9个)</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
@@ -181,13 +181,66 @@ Servlet容器可以来创建Servlet，并调用Servlet的相关生命周期方�
 <li><p>Servlet Request：<br>2.1 获取请求参数    </p>
 <pre><code>1.String getParameter(String name)  根据请求参数的名字，返回参数值。 
   请求参数有多个值（例如checkbox），该方法只能获取第一个提交的值。 
-2.String[] getParameterValues(String name) 根据请求参数的名字，返回请求参数对应的字符串数组  
+2.String[] getParameterValues(String name) 根据请求参数的名字，返回请求参数对应的字符 串数组  
 3.Map getParameterMap()  返回请求参数的键值对：key:参数名，value:参数值，String数组类型
 4.Enumeration getParameterNames()    返回参数名对应的Enumeration对象，类似于ServletContext(或ServletConfig)的getInitParameterNames()方法。  
 </code></pre><p>2.2 获取请求URL  httpServletRequest.getRequestURI()　　<br>2.3 获取请求方式     httpServletRequest.getMethod()<br>2.4 获取请求方式为get时，请求参数对应的那个字符串，即？后的那个字符串<br>httpServletRequest.getQueryString()<br>2.5 获取请求的Servlet的映射路径    httpServletRequest.getServletPath()<br>2.6 和attribute相关的几个方法</p>
 </li>
 <li>httpServletRequest:是ServletRequest的子接口。针对于HTTP请求所定义。里面包含了大量获取HTTP请求相关的方法。        </li>
 </ol>
+<h2 id="ServletResponse"><a href="#ServletResponse" class="headerlink" title="ServletResponse"></a>ServletResponse</h2><p>ServletResponse:封装了相应信息，如果想给用户什么响应，具体可以使用该接口的方法实现。  </p>
+<ol>
+<li>getWriter():返回PrintWriter 对象。调用该对象的print()方法，将把print() 中的参数直接打印到客户的浏览器上。  </li>
+<li>设置响应的内容类型： <code>response.setContentType(&quot;spplication/msword&quot;)</code>  </li>
+<li>void sendRedirect(String location):请求重定向（此方法为HttpServletResponse 中定义。）   </li>
+</ol>
+<hr>
+<p>例：在web.xml 文件中设置两个WEB应用的初始化参数，user，password<br>定义一个login.html 里面定义两个请求字段：user，password<br>再创建一个LoginServlet，在其中获取请求的user，password，对比其和web.xml文件中定义的请求参数是否一致，若一致响应Hello：xxx，若不一致，响应Sorry：xxx   xxx为user </p>
+<hr>
+<h2 id="GennericServlet"><a href="#GennericServlet" class="headerlink" title="GennericServlet"></a>GennericServlet</h2><ol>
+<li>是一个Servlet ，是Servlet接口和ServletConfig 接口的实现类，但是一个抽象类，其中的servive方法为抽象方法。  </li>
+<li>如果新建的 Servlet 程序直接继承 GenericServlet 会使开发更简洁。  </li>
+<li>具体实现：<br>3.1 在GennericServlet 中声明了一个ServletConfig 类型的成员变量，在init(ServletConfig)方法中对其进行了初始化。<br>3.2 利用servletConfig 成员变量的方法实现了 ServletConfig 接口的方法。<br>3.3 还定义了一个init()方法。在init(ServletConfig)方法中对其进行调用，子类可以直接覆盖init()在其中实现对Servlet的初始化。<br>3.4 不建议直接覆盖init(ServletConfig)，因为如果忘记编写super(ServletConfig),而还是用了ServletConfig接口的方法，则会出现空指针异常。<br>3.5 新建的init(){}方法并非Servlet的生命周期方法，而init(ServletConfig)方法是相关的生命周期方法。   </li>
+</ol>
+<h2 id="HttpServlet"><a href="#HttpServlet" class="headerlink" title="HttpServlet:"></a>HttpServlet:</h2><ol>
+<li>是一个Servlet ，继承自GenericServlet。针对于HTTP协议所定制。  </li>
+<li>在service() 方法中直接把ServletRequest 和ServletResponse 转为HttpServletRequest和HttpServletResponse 。并调用了重载的service(HttpServletRequest,HttpServletResponse)  </li>
+<li>在 service(HttpServletRequest,HttpServletResponse)获取了请求方式：request.getMethod().doXxx()方法（xxx为具体的请求方式，比如doGet，doPost）  </li>
+<li>实际开发中，直接继承HttpServlet，并根据请求方式复写doXxx()方法接口。  </li>
+<li>好处：直接针对性的覆盖doXxx()方法；直接使用HttpServletRequest和HttpServletResponse，不需要强转。  </li>
+</ol>
+<h2 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h2><ol>
+<li>JSP是简化Servlet 编写的一种技术。将Java代码和HTML语句混合在同一个文件中编写，只对网页中的要动态产生的内容采用Java代码来编写，而对固定不变的静态内容采用普通静态HTML页面方式编写。  </li>
+<li>JSP不能放置在WEB-INF及其子目录下。</li>
+<li>JSP的运行原理：JSP本质上是一个Servlet  </li>
+<li>Java Server Page:java 服务器端网页</li>
+</ol>
+<h3 id="JSP页面的隐含变量-共9个"><a href="#JSP页面的隐含变量-共9个" class="headerlink" title="JSP页面的隐含变量(共9个)"></a>JSP页面的隐含变量(共9个)</h3><p>隐含变量即没有声明就可以使用的变量。<br>requset , response , pageContext , session , application , config , out , page , exception  </p>
+<ol>
+<li>request: HttpServletRequest 的一个对象。  </li>
+<li>response: HttpServletResponse 的一个对象(在JSP页面几乎不会调用response的任何方法)。  </li>
+<li>pageContext： 页面的上下文，是PageContext 的一个对象。可以从该对象中获取到其他8个隐含对象，也可以获取到当前页面的其他信息（自定义标签时使用）。  </li>
+<li>session:代表浏览器和服务器的一次会话， 是HttpSession 的一个对象。  </li>
+<li>application: 代表当前WEB应用。是ServletContext 对象。  </li>
+<li><p>config： 当前JSP对应的Servlet的ServletConfig对象(几乎不使用)。若需要访问当前JSP配置的初始化参数，需要通过映射的地址才可以。    </p>
+<pre><code>映射JSP  
+ &lt;servlet&gt;  
+    &lt;servlet-name&gt;hellojsp&lt;/servlet-name&gt;  
+    &lt;jsp-file&gt;/hello.jsp&lt;/jsp-file&gt;
+    &lt;init-param&gt;  
+        &lt;!--参数名--&gt;
+        &lt;param-name&gt;user&lt;/param-name&gt;  
+        &lt;!--参数值--&gt;
+        &lt;param-value&gt;root&lt;/param-value&gt;
+    &lt;/init-param&gt;  
+ &lt;/servlet&gt;  
+ &lt;servlet-mapping&gt;  
+    &lt;servlet-name&gt;hellojsp&lt;/servlet-name&gt;  
+    &lt;url-pattern&gt;/hellojsp&lt;/url-pattern&gt;
+ &lt;servlet-mapping&gt;
+</code></pre></li>
+</ol>
+<p>7.out: JspWriter 对象。调用out.println()可以直接把字符串打印到浏览器上。<br>8.page: 指向当前JSP对应的Servlet对象的引用，但为Object类型，只能调用Object类的方法。几乎不使用。<br>9.exception: 只有声明了page 指令的 isErrorPage=”true” 时才可使用。<br><code>&lt;% page isErrorPage=&quot;true&quot; %&gt;</code><br>pageContext,requset,session,application（对属性的作用域的范围从小到大）</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -214,18 +267,18 @@ Servlet容器可以来创建Servlet，并调用Servlet的相关生命周期方�
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/08/20/搭建大数据集群方案/" title="">
+ <a href="/2016/08/20/搭建大数据集群方案/" title="搭建大数据集群方案">
   <strong>上一篇：</strong><br/>
   <span>
-  (no title)</span>
+  搭建大数据集群方案</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/07/18/Hadoop安装配置/"  title="Hadoop安装配置">
+<a href="/2016/07/18/javascript/"  title="javascript">
  <strong>下一篇：</strong><br/> 
- <span>Hadoop安装配置
+ <span>javascript
 </span>
 </a>
 </div>
@@ -240,7 +293,7 @@ Servlet容器可以来创建Servlet，并调用Servlet的相关生命周期方�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaWeb"><span class="toc-number">1.</span> <span class="toc-text">JavaWeb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet容器"><span class="toc-number">1.1.</span> <span class="toc-text">Servlet容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-生命周期的方法"><span class="toc-number">1.2.</span> <span class="toc-text">Servlet 生命周期的方法:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#以下方法都是由Servlet容器负责调用"><span class="toc-number">1.2.1.</span> <span class="toc-text">以下方法都是由Servlet容器负责调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#load-on-startup-参数"><span class="toc-number">1.2.2.</span> <span class="toc-text">load-on-startup 参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet-mapping"><span class="toc-number">1.2.3.</span> <span class="toc-text">Servlet-mapping</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet的HelloWorld"><span class="toc-number">1.3.</span> <span class="toc-text">Servlet的HelloWorld</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个Servlet接口的实现类"><span class="toc-number">1.3.1.</span> <span class="toc-text">创建一个Servlet接口的实现类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在web-xml里配置和映射Servlet"><span class="toc-number">1.3.2.</span> <span class="toc-text">在web.xml里配置和映射Servlet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletConfig对象"><span class="toc-number">1.4.</span> <span class="toc-text">ServletConfig对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletContext接口"><span class="toc-number">1.5.</span> <span class="toc-text">ServletContext接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何再Servlet中获取请求信息"><span class="toc-number">1.6.</span> <span class="toc-text">如何再Servlet中获取请求信息</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaWeb"><span class="toc-number">1.</span> <span class="toc-text">JavaWeb</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet容器"><span class="toc-number">1.1.</span> <span class="toc-text">Servlet容器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet-生命周期的方法"><span class="toc-number">1.2.</span> <span class="toc-text">Servlet 生命周期的方法:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#以下方法都是由Servlet容器负责调用"><span class="toc-number">1.2.1.</span> <span class="toc-text">以下方法都是由Servlet容器负责调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#load-on-startup-参数"><span class="toc-number">1.2.2.</span> <span class="toc-text">load-on-startup 参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Servlet-mapping"><span class="toc-number">1.2.3.</span> <span class="toc-text">Servlet-mapping</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Servlet的HelloWorld"><span class="toc-number">1.3.</span> <span class="toc-text">Servlet的HelloWorld</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建一个Servlet接口的实现类"><span class="toc-number">1.3.1.</span> <span class="toc-text">创建一个Servlet接口的实现类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在web-xml里配置和映射Servlet"><span class="toc-number">1.3.2.</span> <span class="toc-text">在web.xml里配置和映射Servlet</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletConfig对象"><span class="toc-number">1.4.</span> <span class="toc-text">ServletConfig对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletContext接口"><span class="toc-number">1.5.</span> <span class="toc-text">ServletContext接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何再Servlet中获取请求信息"><span class="toc-number">1.6.</span> <span class="toc-text">如何再Servlet中获取请求信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ServletResponse"><span class="toc-number">1.7.</span> <span class="toc-text">ServletResponse</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GennericServlet"><span class="toc-number">1.8.</span> <span class="toc-text">GennericServlet</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HttpServlet"><span class="toc-number">1.9.</span> <span class="toc-text">HttpServlet:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSP"><span class="toc-number">1.10.</span> <span class="toc-text">JSP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSP页面的隐含变量-共9个"><span class="toc-number">1.10.1.</span> <span class="toc-text">JSP页面的隐含变量(共9个)</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
