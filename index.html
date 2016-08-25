@@ -196,7 +196,7 @@
 </ol>
 <h2 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h2><ol>
 <li>JSP是简化Servlet 编写的一种技术。将Java代码和HTML语句混合在同一个文件中编写，只对网页中的要动态产生的内容采用Java代码来编写，而对固定不变的静态内容采用普通静态HTML页面方式编写。  </li>
-<li>JSP不能放置在WEB-INF及其子目录下。</li>
+<li>JSP不建议放置在WEB-INF及其子目录下。</li>
 <li>JSP的运行原理：JSP本质上是一个Servlet  </li>
 <li>Java Server Page:java 服务器端网页</li>
 </ol>
@@ -226,6 +226,15 @@
 </code></pre></li>
 </ol>
 <p>7.out: JspWriter 对象。调用out.println()可以直接把字符串打印到浏览器上。<br>8.page: 指向当前JSP对应的Servlet对象的引用，但为Object类型，只能调用Object类的方法。几乎不使用。<br>9.exception: 只有声明了page 指令的 isErrorPage=”true” 时才可使用。<br><code>&lt;% page isErrorPage=&quot;true&quot; %&gt;</code><br>pageContext,requset,session,application（对属性的作用域的范围从小到大）</p>
+<h3 id="JSP模板元素"><a href="#JSP模板元素" class="headerlink" title="JSP模板元素"></a>JSP模板元素</h3><p>JSP页面中静态HTML内容称之为JSP模板元素。</p>
+<h3 id="JSP表达式"><a href="#JSP表达式" class="headerlink" title="JSP表达式"></a>JSP表达式</h3><p>JSP表达式提供了将一个java变量或表达式的计算结果输出到客户端的简化方式，它将要输出的变量或表达式直接封装在&lt;%=   %&gt;之中。  </p>
+<h3 id="JSP脚本片段"><a href="#JSP脚本片段" class="headerlink" title="JSP脚本片段"></a>JSP脚本片段</h3><p>JSP脚本片段指嵌套在&lt;%  和  %&gt; 之中的一条或多条Java程序代码。<br>多个脚本片段中的代码可以互相访问。  </p>
+<h3 id="JSP声明"><a href="#JSP声明" class="headerlink" title="JSP声明"></a>JSP声明</h3><p>JSP声明将Java代码封装到&lt;%!  和  %&gt;之中，它里面的代码将被插入进Servlet的_jspService方法的外面。(在jsp页面中几乎不这样使用)  </p>
+<h3 id="JSP注释"><a href="#JSP注释" class="headerlink" title="JSP注释"></a>JSP注释</h3><p><code>&lt;%-- JSP注释 --%&gt;</code><br><code>&lt;!-- html注释 --&gt;</code><br>区别：jsp注释可以阻止java代码的执行。  </p>
+<h3 id="和属性相关的方法"><a href="#和属性相关的方法" class="headerlink" title="和属性相关的方法"></a>和属性相关的方法</h3><ol>
+<li>方法<br>Object getAttribute(String name):获取指定的属性<br>Enumeration getArrtibuteNames()：获取所有的属性的名字组成的Enumeration对象<br>removeAttribute(String name)：移除指定的属性<br>void setAttribute(String name.Object o):设置属性  </li>
+<li>pageContext,request,session,application 对象都有这些方法。<br>这四个对象也称之为域对象。<br>pageContext ：属性的作用范围仅限于当前JSP页面<br>request ：属性的作用范围仅限于同一个请求<br>session ：属性的作用范围限于一次会话：浏览器打开直到关闭称之为一次会话(在此期间会话不失效)<br>application ：属性的作用范围限于当前WEB应用。是范围最大的作用范围，只要在一处设置属性，在其他各处的JSP或Servlet中都可以获取到</li>
+</ol>
 
         
         
