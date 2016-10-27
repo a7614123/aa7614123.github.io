@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        搭建大数据集群方案｜undefined
+        HDFS的文件读写操作｜undefined
         
     </title>
 
-    <link rel="canonical" href="http://chenxigong.top/2016/08/20/搭建大数据集群方案/">
+    <link rel="canonical" href="http://chenxigong.top/2016/09/09/HDFS的文件读写操作/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -142,12 +142,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>搭建大数据集群方案</h1>
+                    <h1>HDFS的文件读写操作</h1>
                     
                     <span class="meta">
                          作者 Chen xigong
                         <span>
-                          日期 2016-08-20
+                          日期 2016-09-09
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -159,7 +159,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            搭建大数据集群方案
+            HDFS的文件读写操作
         </span>
     </div>
 </header>
@@ -170,21 +170,30 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h1 id="搭建大数据集群方案"><a href="#搭建大数据集群方案" class="headerlink" title="搭建大数据集群方案"></a>搭建大数据集群方案</h1><h3 id="1-规划：一个主节点，两个数据节点"><a href="#1-规划：一个主节点，两个数据节点" class="headerlink" title="1.规划：一个主节点，两个数据节点"></a>1.规划：一个主节点，两个数据节点</h3><h3 id="2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"><a href="#2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户" class="headerlink" title="2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"></a>2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户</h3><h3 id="3-上传hadoop程序包，设置工作目录和权限，然后解压缩。"><a href="#3-上传hadoop程序包，设置工作目录和权限，然后解压缩。" class="headerlink" title="3.上传hadoop程序包，设置工作目录和权限，然后解压缩。"></a>3.上传hadoop程序包，设置工作目录和权限，然后解压缩。</h3><h3 id="4-配置文件设置"><a href="#4-配置文件设置" class="headerlink" title="4.配置文件设置"></a>4.配置文件设置</h3><h3 id="5-格式化，初始化"><a href="#5-格式化，初始化" class="headerlink" title="5.格式化，初始化"></a>5.格式化，初始化</h3><h3 id="6-启动集群"><a href="#6-启动集群" class="headerlink" title="6.启动集群"></a>6.启动集群</h3>
+                <h2 id="HDFS常用命令"><a href="#HDFS常用命令" class="headerlink" title="HDFS常用命令"></a>HDFS常用命令</h2><p>格式为：hadoop fs -&lt;命令&gt; &lt;目标&gt;</p>
+<ol>
+<li>查看hdfs系统版本<br><code>hdfs version</code>  </li>
+<li>查看hdfs系统状态<br><code>hdfs dfsadmin -report</code>  </li>
+<li>查看目录及文件<br><code>hadoop fs -ls /</code>  </li>
+<li>创建及删除目录<br><code>hadoop fs -mkdir /cxg</code><br><code>hadoop fs -rm /cxg</code><br>删除目录时加个-r<br><code>hadoop fs -rm -r /cxg</code> </li>
+<li>上传及下载文件<br><code>hadoop fs -put &lt;本地文件&gt; &lt;远端目录&gt;</code><br><code>hadoop fs -get &lt;远端文件&gt;</code>  </li>
+<li>查看文件内容<br><code>hadoop fs -cat /cxg/text.txt</code><br>cat只能操作文本文件</li>
+</ol>
+
                 <hr>
                 
 
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/ 2016/08/24/JavaWeb/" data-toggle="tooltip" data-placement="top"
-                           title="JavaWeb">&larr; Previous Post</a>
+                        <a href="/ 2016/10/27/hadoop 1.2.1 完全分布式安装/" data-toggle="tooltip" data-placement="top"
+                           title="Hadoop 1.2.1 完全分布式配置">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/ 2016/07/18/Hadoop 2.2 伪分布安装配置/" data-toggle="tooltip" data-placement="top"
-                           title="Hadoop 2.2 伪分布安装配置">Next Post &rarr;</a>
+                        <a href="/ 2016/09/05/MapReduce处理流程/" data-toggle="tooltip" data-placement="top"
+                           title="">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -197,7 +206,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建大数据集群方案"><span class="toc-text">搭建大数据集群方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-规划：一个主节点，两个数据节点"><span class="toc-text">1.规划：一个主节点，两个数据节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"><span class="toc-text">2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-上传hadoop程序包，设置工作目录和权限，然后解压缩。"><span class="toc-text">3.上传hadoop程序包，设置工作目录和权限，然后解压缩。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-配置文件设置"><span class="toc-text">4.配置文件设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-格式化，初始化"><span class="toc-text">5.格式化，初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-启动集群"><span class="toc-text">6.启动集群</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HDFS常用命令"><span class="toc-text">HDFS常用命令</span></a></li></ol>
                 </div>
             </div>
         </div>

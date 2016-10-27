@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        搭建大数据集群方案｜undefined
+        Hadoop 1.2.1 完全分布式配置｜undefined
         
     </title>
 
-    <link rel="canonical" href="http://chenxigong.top/2016/08/20/搭建大数据集群方案/">
+    <link rel="canonical" href="http://chenxigong.top/2016/10/27/hadoop 1.2.1 完全分布式安装/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -142,12 +142,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>搭建大数据集群方案</h1>
+                    <h1>Hadoop 1.2.1 完全分布式配置</h1>
                     
                     <span class="meta">
                          作者 Chen xigong
                         <span>
-                          日期 2016-08-20
+                          日期 2016-10-27
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -159,7 +159,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            搭建大数据集群方案
+            Hadoop 1.2.1 完全分布式配置
         </span>
     </div>
 </header>
@@ -170,21 +170,55 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h1 id="搭建大数据集群方案"><a href="#搭建大数据集群方案" class="headerlink" title="搭建大数据集群方案"></a>搭建大数据集群方案</h1><h3 id="1-规划：一个主节点，两个数据节点"><a href="#1-规划：一个主节点，两个数据节点" class="headerlink" title="1.规划：一个主节点，两个数据节点"></a>1.规划：一个主节点，两个数据节点</h3><h3 id="2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"><a href="#2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户" class="headerlink" title="2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"></a>2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户</h3><h3 id="3-上传hadoop程序包，设置工作目录和权限，然后解压缩。"><a href="#3-上传hadoop程序包，设置工作目录和权限，然后解压缩。" class="headerlink" title="3.上传hadoop程序包，设置工作目录和权限，然后解压缩。"></a>3.上传hadoop程序包，设置工作目录和权限，然后解压缩。</h3><h3 id="4-配置文件设置"><a href="#4-配置文件设置" class="headerlink" title="4.配置文件设置"></a>4.配置文件设置</h3><h3 id="5-格式化，初始化"><a href="#5-格式化，初始化" class="headerlink" title="5.格式化，初始化"></a>5.格式化，初始化</h3><h3 id="6-启动集群"><a href="#6-启动集群" class="headerlink" title="6.启动集群"></a>6.启动集群</h3>
+                <h2 id="配置hadoop-env-sh"><a href="#配置hadoop-env-sh" class="headerlink" title="配置hadoop-env.sh:"></a>配置hadoop-env.sh:</h2><pre><code>[hadoop@master conf]$ vi hadoop-env.sh
+在export JAVA_HOME下添加：export JAVA_HOME=/opt/jdk1.7.0_45  
+</code></pre><h2 id="配置core-site-xml"><a href="#配置core-site-xml" class="headerlink" title="配置core-site.xml:"></a>配置core-site.xml:</h2><pre><code>[hadoop@master conf]$ vi core-site.xml
+添加：&lt;configuration&gt;
+         &lt;property&gt;
+              &lt;name&gt;fs.default.name&lt;/name&gt;
+              &lt;value&gt;hdfs://master:9000&lt;/value&gt;
+         &lt;/property&gt;
+      &lt;/configuration&gt;
+</code></pre><h2 id="配置-hdfs-site-xml"><a href="#配置-hdfs-site-xml" class="headerlink" title="配置 hdfs-site.xml"></a>配置 hdfs-site.xml</h2><pre><code>[hadoop@master conf]$ vi hdfs-site.xml
+添加：&lt;configuration&gt;
+         &lt;property&gt;
+              &lt;name&gt;dfs.replication&lt;/name&gt;
+              &lt;value&gt;1&lt;/value&gt;
+         &lt;/property&gt;
+      &lt;/configuration&gt;
+</code></pre><h2 id="配置mapred-site-xml"><a href="#配置mapred-site-xml" class="headerlink" title="配置mapred-site.xml"></a>配置mapred-site.xml</h2><pre><code>[hadoop@master conf]$ vi mapred-site.xml
+添加：&lt;configuration&gt;。/
+              &lt;name&gt;mapred.job.tracker&lt;/name&gt;
+              &lt;value&gt;master:9001&lt;/value&gt;
+
+         &lt;/property&gt;
+      &lt;/configuration&gt; 
+</code></pre><h2 id="编辑master："><a href="#编辑master：" class="headerlink" title="编辑master："></a>编辑master：</h2><pre><code>[hadoop@master conf]$ vi masters
+添加： #localhost
+       master
+</code></pre><h2 id="编辑slaves："><a href="#编辑slaves：" class="headerlink" title="编辑slaves："></a>编辑slaves：</h2><pre><code>[hadoop@master conf]$ vi slaves
+添加： #localhost
+       slave1
+       slave2
+</code></pre><h2 id="复制hadoop，保证每个节点都有与master相同的文件夹："><a href="#复制hadoop，保证每个节点都有与master相同的文件夹：" class="headerlink" title="复制hadoop，保证每个节点都有与master相同的文件夹："></a>复制hadoop，保证每个节点都有与master相同的文件夹：</h2><pre><code>[hadoop@master conf]$ cd ..     
+[hadoop@master ~]$ scp -r hadoop-1.2.1 hadoop@slave1:/home/hadoop/   (copy文件夹时加  -r)
+</code></pre><h2 id="格式化：-只格式化master"><a href="#格式化：-只格式化master" class="headerlink" title="格式化：(只格式化master)"></a>格式化：(只格式化master)</h2><pre><code>[hadoop@master hadoop-1.2.1]$cd bin
+[hadoop@master bin]$ ./hadoop namenode -format
+</code></pre><h2 id="启动守护进程："><a href="#启动守护进程：" class="headerlink" title="启动守护进程："></a>启动守护进程：</h2><pre><code>[hadoop@master bin]$ ./start-all.sh
+jps 查看进程
+</code></pre><p>1.修改完hdfs-site.xml中的replication值后，没有将hadoop重新scp到两个数据节点<br>2.两个数据节点的DataNode进程没启动，原因是没有关闭三台虚拟机的selinux和iptables。关闭方法：<br>1.su root<br>2.setenforce=0<br>3.vi /etC/Selinux/config(此处本无大小写之分，只是为防止出现qq表情)，修改selinux=disabled<br>4.chkconfig –level 35 iptables off<br>5.reboot  </p>
+<h2 id="linux-中chmod命令使用的详细解释："><a href="#linux-中chmod命令使用的详细解释：" class="headerlink" title="linux 中chmod命令使用的详细解释："></a>linux 中chmod命令使用的详细解释：</h2><p>格式chmod   权限   要修改权限的文件linux中的权限如下：<br>-rw——- (600) – 只有属主有读写权限。<br>-rw-r–r– (644) – 只有属主有读写权限；而属组用户和其他用户只有读权限。<br>-rwx—— (700) – 只有属主有读、写、执行权限。<br>-rwxr-xr-x (755) – 属主有读、写、执行权限；而属组用户和其他用户只有读、执行权限。<br>-rwx–x–x (711) – 属主有读、写、执行权限；而属组用户和其他用户只有执行权限。<br>-rw-rw-rw- (666) – 所有用户都有文件读、写权限。这种做法不可取。<br>-rwxrwxrwx (777) – 所有用户都有读、写、执行权限。更不可取的做。  </p>
+<p>777对应了9位分别是属主有读、写、执行权限；和属组用户和其他用户的读、写、执行权限。<br>允许某个权限就置1，777（8进制）=111111111（2进制），9位都置一，就是所有权限都开 命令为：chmod 700 a.c</p>
+
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/ 2016/08/24/JavaWeb/" data-toggle="tooltip" data-placement="top"
-                           title="JavaWeb">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/ 2016/07/18/Hadoop 2.2 伪分布安装配置/" data-toggle="tooltip" data-placement="top"
-                           title="Hadoop 2.2 伪分布安装配置">Next Post &rarr;</a>
+                        <a href="/ 2016/09/09/HDFS的文件读写操作/" data-toggle="tooltip" data-placement="top"
+                           title="HDFS的文件读写操作">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -197,7 +231,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建大数据集群方案"><span class="toc-text">搭建大数据集群方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-规划：一个主节点，两个数据节点"><span class="toc-text">1.规划：一个主节点，两个数据节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"><span class="toc-text">2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-上传hadoop程序包，设置工作目录和权限，然后解压缩。"><span class="toc-text">3.上传hadoop程序包，设置工作目录和权限，然后解压缩。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-配置文件设置"><span class="toc-text">4.配置文件设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-格式化，初始化"><span class="toc-text">5.格式化，初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-启动集群"><span class="toc-text">6.启动集群</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#配置hadoop-env-sh"><span class="toc-text">配置hadoop-env.sh:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置core-site-xml"><span class="toc-text">配置core-site.xml:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置-hdfs-site-xml"><span class="toc-text">配置 hdfs-site.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置mapred-site-xml"><span class="toc-text">配置mapred-site.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编辑master："><span class="toc-text">编辑master：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编辑slaves："><span class="toc-text">编辑slaves：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复制hadoop，保证每个节点都有与master相同的文件夹："><span class="toc-text">复制hadoop，保证每个节点都有与master相同的文件夹：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#格式化：-只格式化master"><span class="toc-text">格式化：(只格式化master)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动守护进程："><span class="toc-text">启动守护进程：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux-中chmod命令使用的详细解释："><span class="toc-text">linux 中chmod命令使用的详细解释：</span></a></li></ol>
                 </div>
             </div>
         </div>

@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        搭建大数据集群方案｜undefined
+        undefined
         
     </title>
 
-    <link rel="canonical" href="http://chenxigong.top/2016/08/20/搭建大数据集群方案/">
+    <link rel="canonical" href="http://chenxigong.top/archives/2016/09/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
 " data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -120,111 +120,6 @@
 </script>
 
 <!-- Main Content -->
-
-<!--only post-->
-
-
-<img class="wechat-title-img"
-     src="">
-
-
-<style>
-    
-    header.intro-header {
-        background-image: url('')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>搭建大数据集群方案</h1>
-                    
-                    <span class="meta">
-                         作者 Chen xigong
-                        <span>
-                          日期 2016-08-20
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="post-title-haojen">
-        <span>
-            搭建大数据集群方案
-        </span>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h1 id="搭建大数据集群方案"><a href="#搭建大数据集群方案" class="headerlink" title="搭建大数据集群方案"></a>搭建大数据集群方案</h1><h3 id="1-规划：一个主节点，两个数据节点"><a href="#1-规划：一个主节点，两个数据节点" class="headerlink" title="1.规划：一个主节点，两个数据节点"></a>1.规划：一个主节点，两个数据节点</h3><h3 id="2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"><a href="#2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户" class="headerlink" title="2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"></a>2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户</h3><h3 id="3-上传hadoop程序包，设置工作目录和权限，然后解压缩。"><a href="#3-上传hadoop程序包，设置工作目录和权限，然后解压缩。" class="headerlink" title="3.上传hadoop程序包，设置工作目录和权限，然后解压缩。"></a>3.上传hadoop程序包，设置工作目录和权限，然后解压缩。</h3><h3 id="4-配置文件设置"><a href="#4-配置文件设置" class="headerlink" title="4.配置文件设置"></a>4.配置文件设置</h3><h3 id="5-格式化，初始化"><a href="#5-格式化，初始化" class="headerlink" title="5.格式化，初始化"></a>5.格式化，初始化</h3><h3 id="6-启动集群"><a href="#6-启动集群" class="headerlink" title="6.启动集群"></a>6.启动集群</h3>
-                <hr>
-                
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/ 2016/08/24/JavaWeb/" data-toggle="tooltip" data-placement="top"
-                           title="JavaWeb">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/ 2016/07/18/Hadoop 2.2 伪分布安装配置/" data-toggle="tooltip" data-placement="top"
-                           title="Hadoop 2.2 伪分布安装配置">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-            </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建大数据集群方案"><span class="toc-text">搭建大数据集群方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-规划：一个主节点，两个数据节点"><span class="toc-text">1.规划：一个主节点，两个数据节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户"><span class="toc-text">2.安装操作系统，配置防火墙，jdk，配置hosts文件，网络免密钥登陆，创建hadoop用户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-上传hadoop程序包，设置工作目录和权限，然后解压缩。"><span class="toc-text">3.上传hadoop程序包，设置工作目录和权限，然后解压缩。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-配置文件设置"><span class="toc-text">4.配置文件设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-格式化，初始化"><span class="toc-text">5.格式化，初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-启动集群"><span class="toc-text">6.启动集群</span></a></li></ol></li></ol></li></ol>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
-    </div>
-</article>
-
-
-
-
-
 
 <!-- Footer -->
 <!-- Footer -->

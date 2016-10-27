@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="ѧϰ�ܽ� ˼������ ֪ʶ����">
+    <meta name="keyword" content="undefined">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="Hexo" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Hadoop 2.2 伪分布安装配置｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="http://chenxigong.top/2016/07/18/Hadoop 2.2 伪分布安装配置/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('undefined')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    Hexo
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+                        
+                        <li>
+                            <a href="/Tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Hadoop 2.2 伪分布安装配置</h1>
+                    
+                    <span class="meta">
+                         作者 Chen xigong
+                        <span>
+                          日期 2016-07-18
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Hadoop 2.2 伪分布安装配置
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h1 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h1><p>先将linux的防火墙关闭<br><strong>1) 重启后生效</strong><br>开启： <code>chkconfig iptables on</code><br>关闭： <code>chkconfig iptables off</code>   关闭开机启动</p>
+<p><strong>2) 即时生效，重启后失效</strong><br>开启： <code>service iptables start</code><br>关闭： <code>service iptables stop</code>  </p>
+<p><strong>3) 查看防火墙状态</strong><br><code>service iptables status</code> </p>
+<h1 id="修改IP"><a href="#修改IP" class="headerlink" title="修改IP"></a>修改IP</h1><p><code>vi /etc/sysconfig/network-scripts/ifcfg-eth0</code>  </p>
+<pre><code>iiDEVICE=eth0
+TYPE=Ethernet
+UUID=d78eebc7-cea9-44ce-a4ff-b6d55092093c
+ONBOOT=yes
+NM_CONTROLLED=yes
+BOOTPROTO=static  ##
+NETMASK=255.255.255.0  ##
+IPADDR=192.168.187.100  ##
+GATEWAY=192.168.187.1  ##
+PREFIX=24
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=yes
+IPV6INIT=no
+NAME=&quot;System eth0&quot;
+HWADDR=00:0C:29:7A:7C:58
+LAST_CONNECT=1471689748
+</code></pre><h1 id="修改主机名"><a href="#修改主机名" class="headerlink" title="修改主机名"></a>修改主机名</h1><p><code>vi /etc/sysconfig/network</code>  </p>
+<pre><code>NETWORKING=yes
+HOSTNAME=master  
+</code></pre><p>查看主机名 <code>hostname</code></p>
+<h1 id="修改主机名和ip地址的映射关系"><a href="#修改主机名和ip地址的映射关系" class="headerlink" title="修改主机名和ip地址的映射关系"></a>修改主机名和ip地址的映射关系</h1><p><code>vi /etc/hosts</code>  </p>
+<pre><code>127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.187.100    master
+192.168.187.101    slave1
+192.168.187.102    slave2
+</code></pre><h1 id="创建hadoop用户"><a href="#创建hadoop用户" class="headerlink" title="创建hadoop用户"></a>创建hadoop用户</h1><p><code>adduser hadoop</code><br><code>passwd hadoop</code>  </p>
+<h3 id="转到hadoop用户下"><a href="#转到hadoop用户下" class="headerlink" title="转到hadoop用户下"></a>转到hadoop用户下</h3><p> <code>cd /home/hadoop</code>    </p>
+<h1 id="配置SSH免密码登录"><a href="#配置SSH免密码登录" class="headerlink" title="配置SSH免密码登录"></a>配置SSH免密码登录</h1><p>创建.ssh<br><code>ssh 192.168.187.100</code><br><code>cd.ssh</code>  </p>
+<h2 id="生成ssh免登录密钥"><a href="#生成ssh免登录密钥" class="headerlink" title="生成ssh免登录密钥"></a>生成ssh免登录密钥</h2><p>创建密钥对<br>首先进入.ssh<br><code>ssh-keygen -t rsa</code><br>执行完这个命令后，会生成两个文件id_rsa(私钥)，id_rsa.pub(公钥)<br>将公钥拷贝到要免密码登陆的机器上<br><code>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code><br>或<br><code>ssh-copy-id master</code>    </p>
+<h1 id="配置JDK"><a href="#配置JDK" class="headerlink" title="配置JDK"></a>配置JDK</h1><h2 id="上传JDK包"><a href="#上传JDK包" class="headerlink" title="上传JDK包"></a>上传JDK包</h2><h2 id="解压JDK包"><a href="#解压JDK包" class="headerlink" title="解压JDK包"></a>解压JDK包</h2><p><code>tar -zxvf jdk-7u45-linux-x64.tar.gz -C /解压到的地址</code>  </p>
+<h2 id="配置jdk环境变量"><a href="#配置jdk环境变量" class="headerlink" title="配置jdk环境变量"></a>配置jdk环境变量</h2><p> <code>vi /etc/profile</code><br>在文件末尾添加：<br>    export JAVA_HOME=/opt/jdk1.7.0_45<br>    export PATH=$PATH:$JAVA_HOME/bin<br>刷新配置：<code>source /etc/profile</code></p>
+<h1 id="配置hadoop"><a href="#配置hadoop" class="headerlink" title="配置hadoop"></a>配置hadoop</h1><h2 id="上传hadoop包"><a href="#上传hadoop包" class="headerlink" title="上传hadoop包"></a>上传hadoop包</h2><h2 id="解压hadoop包"><a href="#解压hadoop包" class="headerlink" title="解压hadoop包"></a>解压hadoop包</h2><p>首先在跟目录下创建一个master目录  </p>
+<p><code>mkdir /master</code>  </p>
+<p><code>tar -zxvf hadoop-2.2.0.tar.gz -C /</code>  </p>
+<h2 id="配置hadoop伪分布式（要修改5个文件）"><a href="#配置hadoop伪分布式（要修改5个文件）" class="headerlink" title="配置hadoop伪分布式（要修改5个文件）"></a>配置hadoop伪分布式（要修改5个文件）</h2><p><strong>第一个: <code>hadoop-env.sh</code></strong><br><code>vim hadoop-env.sh</code><br><code>export JAVA_HOME=/opt/jdk1.7.0_45</code>  </p>
+<p><strong>第二个：<code>core-site.xml</code></strong><br><code>vim core-site.xml</code>  </p>
+<pre><code>&lt;configuration&gt;
+    &lt;!--用来指定HDFS的老大（namenode）的地址--&gt;
+    &lt;property&gt;
+        &lt;name&gt;fs.defaultFS&lt;/name&gt;
+        &lt;value&gt;hdfs://master:9000&lt;/value&gt;
+    &lt;/property&gt;
+
+    &lt;!-- 用来指定hadoop运行时产生文件的存放目录 --&gt;
+    &lt;property&gt;    
+        &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+        &lt;value&gt;/master/hadoop-2.2.0/tmp&lt;/value&gt;
+    &lt;/property&gt;
+&lt;configuration&gt;
+</code></pre><p><strong>第三个:<code>hdfs-site.xml</code></strong>  </p>
+<pre><code>&lt;configuration&gt;
+    &lt;!--用来指定HDFS保存数据副本的数量--&gt;
+    &lt;property&gt;
+        &lt;name&gt;dfs.replication&lt;/name&gt;
+        &lt;value&gt;1&lt;/value&gt;
+    &lt;/property&gt;
+&lt;configuration&gt;
+</code></pre><p><strong>第四个：<code>mapred-site.xml(mv mapred-site.xml.template mapred-site.xml)</code></strong>  </p>
+<pre><code>&lt;configuration&gt;  
+
+    &lt;！-- 告诉hadoop以后MR运行在YARN上 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+        &lt;value&gt;yarn&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
+</code></pre><p><strong>第五个：<code>yarn-site.xml</code></strong>  </p>
+<pre><code>&lt;configuration&gt;  
+    &lt;!-- NodeManager获取数据的方式是shuffle --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+        &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+    &lt;/property&gt;
+    &lt;!-- 指定YARN的老大（ResourceManager）的地址 --&gt;
+    &lt;property&gt;
+        &lt;name&gt;yarn.resourcemanager.hostname&lt;/name&gt;
+        &lt;value&gt;master&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;   
+</code></pre><h2 id="将Hadoop添加到环境变量中"><a href="#将Hadoop添加到环境变量中" class="headerlink" title="将Hadoop添加到环境变量中"></a>将Hadoop添加到环境变量中</h2><pre><code>export HADOOP_HOME=/master/hadoop-2.2.0  
+export JAVA_HOME=/opt/jdk1.7.0_45  
+export JRE_HOME=$JAVA_HOME/jre  
+export CLASSPATH=$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH  
+export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH:$HADOOP_HOME/bin  
+</code></pre><p><strong>刷新配置</strong><br><code>source /etc/profile</code>  </p>
+<h2 id="初始化HDFS（格式化文件系统）"><a href="#初始化HDFS（格式化文件系统）" class="headerlink" title="初始化HDFS（格式化文件系统）"></a>初始化HDFS（格式化文件系统）</h2><p><code>hadoop namenode -format(过时了)</code><br><code>hdfs namenode -format</code>   </p>
+<h2 id="启动HDFS和YARN"><a href="#启动HDFS和YARN" class="headerlink" title="启动HDFS和YARN"></a>启动HDFS和YARN</h2><p><code>./start-all.sh(过时了This script is Deprecated. Instead use start-dfs.sh and start-yarn.sh)</code> </p>
+<p>有个小问题（需要多次输入密码）</p>
+<p><strong>通过浏览器的方式验证</strong>  </p>
+<p><a href="http://192.168.187.185:50070(hdfs管理界面" target="_blank" rel="external">http://192.168.187.185:50070(hdfs管理界面</a>)<br><a href="http://192.168.187.185:50030" target="_blank" rel="external">http://192.168.187.185:50030</a><br><a href="http://192.168.187.185:8088(yarn管理界面" target="_blank" rel="external">http://192.168.187.185:8088(yarn管理界面</a>)  </p>
+<h2 id="测试HDFS"><a href="#测试HDFS" class="headerlink" title="测试HDFS"></a>测试HDFS</h2><p><strong>上传文件到HDFS</strong><br><code>hadoop fs -put /opt/jdk-7u45-linux-x64.tar.gz hdfs://master:9000/jdk</code></p>
+<p><strong>从HDFS下载文件到本地</strong><br><code>hadoop fs -get hdfs://master:9000/jdk /home/jdk1.7</code> </p>
+<h2 id="测试MR和YARN"><a href="#测试MR和YARN" class="headerlink" title="测试MR和YARN"></a>测试MR和YARN</h2>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/ 2016/08/20/搭建大数据集群方案/" data-toggle="tooltip" data-placement="top"
+                           title="搭建大数据集群方案">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/ 2016/07/18/javascript/" data-toggle="tooltip" data-placement="top"
+                           title="javascript">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#关闭防火墙"><span class="toc-text">关闭防火墙</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改IP"><span class="toc-text">修改IP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改主机名"><span class="toc-text">修改主机名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改主机名和ip地址的映射关系"><span class="toc-text">修改主机名和ip地址的映射关系</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#创建hadoop用户"><span class="toc-text">创建hadoop用户</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#转到hadoop用户下"><span class="toc-text">转到hadoop用户下</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置SSH免密码登录"><span class="toc-text">配置SSH免密码登录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#生成ssh免登录密钥"><span class="toc-text">生成ssh免登录密钥</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置JDK"><span class="toc-text">配置JDK</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#上传JDK包"><span class="toc-text">上传JDK包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解压JDK包"><span class="toc-text">解压JDK包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置jdk环境变量"><span class="toc-text">配置jdk环境变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#配置hadoop"><span class="toc-text">配置hadoop</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#上传hadoop包"><span class="toc-text">上传hadoop包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解压hadoop包"><span class="toc-text">解压hadoop包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配置hadoop伪分布式（要修改5个文件）"><span class="toc-text">配置hadoop伪分布式（要修改5个文件）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将Hadoop添加到环境变量中"><span class="toc-text">将Hadoop添加到环境变量中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始化HDFS（格式化文件系统）"><span class="toc-text">初始化HDFS（格式化文件系统）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动HDFS和YARN"><span class="toc-text">启动HDFS和YARN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试HDFS"><span class="toc-text">测试HDFS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#测试MR和YARN"><span class="toc-text">测试MR和YARN</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Hexo 2016
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://chenxigong.top/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','undefined','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="undefined">
+</body>
+
+</html>
